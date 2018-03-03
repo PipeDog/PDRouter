@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291D0204AECFA00C31092 /* AppDelegate.m */; };
+		EC9291D4204AECFA00C31092 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291D3204AECFA00C31092 /* ViewController.m */; };
+		EC9291D7204AECFA00C31092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9291D5204AECFA00C31092 /* Main.storyboard */; };
+		EC9291D9204AECFA00C31092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC9291D8204AECFA00C31092 /* Assets.xcassets */; };
+		EC9291DC204AECFA00C31092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9291DA204AECFA00C31092 /* LaunchScreen.storyboard */; };
+		EC9291DF204AECFA00C31092 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291DE204AECFA00C31092 /* main.m */; };
+		EC9291E9204AECFA00C31092 /* PDRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291E8204AECFA00C31092 /* PDRouterTests.m */; };
+		EC9291F4204AECFA00C31092 /* PDRouterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291F3204AECFA00C31092 /* PDRouterUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC9291E5204AECFA00C31092 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC9291C4204AECFA00C31092 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC9291CB204AECFA00C31092;
+			remoteInfo = PDRouter;
+		};
+		EC9291F0204AECFA00C31092 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC9291C4204AECFA00C31092 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC9291CB204AECFA00C31092;
+			remoteInfo = PDRouter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC9291CC204AECFA00C31092 /* PDRouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDRouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9291CF204AECFA00C31092 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC9291D0204AECFA00C31092 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EC9291D2204AECFA00C31092 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EC9291D3204AECFA00C31092 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EC9291D6204AECFA00C31092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC9291D8204AECFA00C31092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC9291DB204AECFA00C31092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EC9291DD204AECFA00C31092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC9291DE204AECFA00C31092 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC9291E4204AECFA00C31092 /* PDRouterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDRouterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9291E8204AECFA00C31092 /* PDRouterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouterTests.m; sourceTree = "<group>"; };
+		EC9291EA204AECFA00C31092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC9291EF204AECFA00C31092 /* PDRouterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDRouterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC9291F3204AECFA00C31092 /* PDRouterUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouterUITests.m; sourceTree = "<group>"; };
+		EC9291F5204AECFA00C31092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC9291C9204AECFA00C31092 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9291E1204AECFA00C31092 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9291EC204AECFA00C31092 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC9291C3204AECFA00C31092 = {
+			isa = PBXGroup;
+			children = (
+				EC9291CE204AECFA00C31092 /* PDRouter */,
+				EC9291E7204AECFA00C31092 /* PDRouterTests */,
+				EC9291F2204AECFA00C31092 /* PDRouterUITests */,
+				EC9291CD204AECFA00C31092 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC9291CD204AECFA00C31092 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC9291CC204AECFA00C31092 /* PDRouter.app */,
+				EC9291E4204AECFA00C31092 /* PDRouterTests.xctest */,
+				EC9291EF204AECFA00C31092 /* PDRouterUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC9291CE204AECFA00C31092 /* PDRouter */ = {
+			isa = PBXGroup;
+			children = (
+				EC9291CF204AECFA00C31092 /* AppDelegate.h */,
+				EC9291D0204AECFA00C31092 /* AppDelegate.m */,
+				EC9291D2204AECFA00C31092 /* ViewController.h */,
+				EC9291D3204AECFA00C31092 /* ViewController.m */,
+				EC9291D5204AECFA00C31092 /* Main.storyboard */,
+				EC9291D8204AECFA00C31092 /* Assets.xcassets */,
+				EC9291DA204AECFA00C31092 /* LaunchScreen.storyboard */,
+				EC9291DD204AECFA00C31092 /* Info.plist */,
+				EC9291DE204AECFA00C31092 /* main.m */,
+			);
+			path = PDRouter;
+			sourceTree = "<group>";
+		};
+		EC9291E7204AECFA00C31092 /* PDRouterTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC9291E8204AECFA00C31092 /* PDRouterTests.m */,
+				EC9291EA204AECFA00C31092 /* Info.plist */,
+			);
+			path = PDRouterTests;
+			sourceTree = "<group>";
+		};
+		EC9291F2204AECFA00C31092 /* PDRouterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EC9291F3204AECFA00C31092 /* PDRouterUITests.m */,
+				EC9291F5204AECFA00C31092 /* Info.plist */,
+			);
+			path = PDRouterUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC9291CB204AECFA00C31092 /* PDRouter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC9291F8204AECFA00C31092 /* Build configuration list for PBXNativeTarget "PDRouter" */;
+			buildPhases = (
+				EC9291C8204AECFA00C31092 /* Sources */,
+				EC9291C9204AECFA00C31092 /* Frameworks */,
+				EC9291CA204AECFA00C31092 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PDRouter;
+			productName = PDRouter;
+			productReference = EC9291CC204AECFA00C31092 /* PDRouter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC9291E3204AECFA00C31092 /* PDRouterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC9291FB204AECFA00C31092 /* Build configuration list for PBXNativeTarget "PDRouterTests" */;
+			buildPhases = (
+				EC9291E0204AECFA00C31092 /* Sources */,
+				EC9291E1204AECFA00C31092 /* Frameworks */,
+				EC9291E2204AECFA00C31092 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC9291E6204AECFA00C31092 /* PBXTargetDependency */,
+			);
+			name = PDRouterTests;
+			productName = PDRouterTests;
+			productReference = EC9291E4204AECFA00C31092 /* PDRouterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC9291EE204AECFA00C31092 /* PDRouterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC9291FE204AECFA00C31092 /* Build configuration list for PBXNativeTarget "PDRouterUITests" */;
+			buildPhases = (
+				EC9291EB204AECFA00C31092 /* Sources */,
+				EC9291EC204AECFA00C31092 /* Frameworks */,
+				EC9291ED204AECFA00C31092 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC9291F1204AECFA00C31092 /* PBXTargetDependency */,
+			);
+			name = PDRouterUITests;
+			productName = PDRouterUITests;
+			productReference = EC9291EF204AECFA00C31092 /* PDRouterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC9291C4204AECFA00C31092 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = PipeDog;
+				TargetAttributes = {
+					EC9291CB204AECFA00C31092 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					EC9291E3204AECFA00C31092 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EC9291CB204AECFA00C31092;
+					};
+					EC9291EE204AECFA00C31092 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EC9291CB204AECFA00C31092;
+					};
+				};
+			};
+			buildConfigurationList = EC9291C7204AECFA00C31092 /* Build configuration list for PBXProject "PDRouter" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC9291C3204AECFA00C31092;
+			productRefGroup = EC9291CD204AECFA00C31092 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC9291CB204AECFA00C31092 /* PDRouter */,
+				EC9291E3204AECFA00C31092 /* PDRouterTests */,
+				EC9291EE204AECFA00C31092 /* PDRouterUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC9291CA204AECFA00C31092 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9291DC204AECFA00C31092 /* LaunchScreen.storyboard in Resources */,
+				EC9291D9204AECFA00C31092 /* Assets.xcassets in Resources */,
+				EC9291D7204AECFA00C31092 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9291E2204AECFA00C31092 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9291ED204AECFA00C31092 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC9291C8204AECFA00C31092 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9291D4204AECFA00C31092 /* ViewController.m in Sources */,
+				EC9291DF204AECFA00C31092 /* main.m in Sources */,
+				EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9291E0204AECFA00C31092 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9291E9204AECFA00C31092 /* PDRouterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC9291EB204AECFA00C31092 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC9291F4204AECFA00C31092 /* PDRouterUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC9291E6204AECFA00C31092 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC9291CB204AECFA00C31092 /* PDRouter */;
+			targetProxy = EC9291E5204AECFA00C31092 /* PBXContainerItemProxy */;
+		};
+		EC9291F1204AECFA00C31092 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC9291CB204AECFA00C31092 /* PDRouter */;
+			targetProxy = EC9291F0204AECFA00C31092 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC9291D5204AECFA00C31092 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC9291D6204AECFA00C31092 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EC9291DA204AECFA00C31092 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC9291DB204AECFA00C31092 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC9291F6204AECFA00C31092 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EC9291F7204AECFA00C31092 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC9291F9204AECFA00C31092 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PDRouter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PipeDog.PDRouter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC9291FA204AECFA00C31092 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PDRouter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PipeDog.PDRouter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EC9291FC204AECFA00C31092 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PDRouterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PipeDog.PDRouterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PDRouter.app/PDRouter";
+			};
+			name = Debug;
+		};
+		EC9291FD204AECFA00C31092 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PDRouterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PipeDog.PDRouterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PDRouter.app/PDRouter";
+			};
+			name = Release;
+		};
+		EC9291FF204AECFA00C31092 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PDRouterUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PipeDog.PDRouterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PDRouter;
+			};
+			name = Debug;
+		};
+		EC929200204AECFA00C31092 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PDRouterUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PipeDog.PDRouterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PDRouter;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC9291C7204AECFA00C31092 /* Build configuration list for PBXProject "PDRouter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9291F6204AECFA00C31092 /* Debug */,
+				EC9291F7204AECFA00C31092 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC9291F8204AECFA00C31092 /* Build configuration list for PBXNativeTarget "PDRouter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9291F9204AECFA00C31092 /* Debug */,
+				EC9291FA204AECFA00C31092 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC9291FB204AECFA00C31092 /* Build configuration list for PBXNativeTarget "PDRouterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9291FC204AECFA00C31092 /* Debug */,
+				EC9291FD204AECFA00C31092 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC9291FE204AECFA00C31092 /* Build configuration list for PBXNativeTarget "PDRouterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC9291FF204AECFA00C31092 /* Debug */,
+				EC929200204AECFA00C31092 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC9291C4204AECFA00C31092 /* Project object */;
+}
