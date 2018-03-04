@@ -10,6 +10,6 @@
 
 @protocol PDRouterProtocol <NSObject>
 
-- (BOOL)openURL:(NSURL *)url; // Push to web page.
+- (BOOL)openURL:(NSURL *)url; // Handle the url of the unregistered event.
 
 @end
