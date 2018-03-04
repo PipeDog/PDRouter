@@ -10,7 +10,7 @@
 
 @implementation NSURL (PDAdd)
 
-- (NSDictionary <NSString *, NSString *>*)queryParameters {
+- (NSDictionary <NSString *, NSString *>*)queryItems {
     NSURLComponents *components = [NSURLComponents componentsWithString:self.absoluteString];
     NSArray<NSURLQueryItem *> *queryItems = components.queryItems;
     NSMutableDictionary<NSString *, id> *queryDict = [NSMutableDictionary dictionary];

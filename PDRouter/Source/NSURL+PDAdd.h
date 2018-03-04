@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSURL (PDAdd)
 
-@property (nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *queryParameters;
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *queryItems;
 
 @end
 

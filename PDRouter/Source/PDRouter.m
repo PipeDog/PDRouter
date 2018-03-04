@@ -66,7 +66,7 @@
             NSMutableArray<PDRouterHandler> *handlers = self.listeners[host];
 
             for (PDRouterHandler handler in handlers) {
-                if (handler) handler(target, URL.queryParameters);
+                if (handler) handler(target, URL.queryItems);
             }
         } else {
             // The event has not yet been registered.
