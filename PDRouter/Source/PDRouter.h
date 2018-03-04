@@ -21,7 +21,7 @@ typedef void (^PDRouterHandler)(id _Nullable target, NSDictionary * _Nullable pa
 @property (class, strong, readonly) PDRouter *defaultRouter;
 
 @property (nonatomic, weak) id<PDRouterProtocol> delegate;
-@property (nonatomic, copy) NSString *localScheme; // @eg scheme
+@property (nonatomic, copy) NSString *localScheme; // Custom scheme, this property is used to determine whether native processing is done.
 
 // Call these method to open native page or web page.
 - (void)sendAction:(NSString *)action;
