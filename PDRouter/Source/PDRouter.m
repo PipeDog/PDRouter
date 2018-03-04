@@ -49,8 +49,7 @@
 
     // Matching order
     //   scheme://event/query
-    //   scheme://host/query
-    //   scheme://host/path?query
+    //   other url
 
     NSURL *URL = [NSURL URLWithString:action];
     NSString *scheme = URL.scheme;
