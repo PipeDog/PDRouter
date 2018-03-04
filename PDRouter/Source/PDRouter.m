@@ -85,7 +85,11 @@
         return [self.delegate openURL:url];
     }
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
+#ifdef __IPHONE_10_0
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+#else
+        [[UIApplication sharedApplication] openURL:url];
+#endif
         return YES;
     }
     return NO;
