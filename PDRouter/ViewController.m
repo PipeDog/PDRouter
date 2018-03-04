@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "NSURL+PDAdd.h"
+#import "PDRouter.h"
 
 @interface ViewController ()
 
@@ -19,6 +21,25 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (IBAction)openURL:(id)sender {
+    [[PDRouter defaultRouter] sendAction:@"https://www.baidu.com"];
+}
+
+- (IBAction)push:(id)sender {
+    [[PDRouter defaultRouter] sendAction:@"pdsc://push?action=push&age=26" to:self];
+}
+
+- (IBAction)pushOtherEvent:(id)sender {
+    [[PDRouter defaultRouter] sendAction:@"pdsc://pushother?action=pushother&author=" to:nil];
+}
+
+- (IBAction)dismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)present:(id)sender {
+    [[PDRouter defaultRouter] sendAction:@"pdsc://present?action=present&author=http://www.baidu.com" to:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

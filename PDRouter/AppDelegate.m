@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "PDRouter+PDAdd.h"
+#import "PDRouterHelper.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [PDRouter defaultRouter].delegate = [PDRouterHelper defaultHelper];
+    [PDRouter defaultRouter].localScheme = @"pdsc";
+    [[PDRouter defaultRouter] registerEvents];
     return YES;
 }
 
