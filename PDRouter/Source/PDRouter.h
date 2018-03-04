@@ -27,8 +27,11 @@ typedef void (^PDRouterHandler)(id _Nullable target, NSDictionary * _Nullable pa
 - (void)sendAction:(NSString *)action;
 - (void)sendAction:(NSString *)action to:(nullable id)target;
 
+// Register event with eventname.
 - (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler;
+// Unregister event with eventname.
 - (void)off:(NSString *)event;
+// Unregister all events.
 - (void)offAll;
 
 @end

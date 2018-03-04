@@ -38,7 +38,7 @@
     }];
 }
 
-- (void)deregisterEvents {
+- (void)unregisterEvents {
     [self offAll];
 }
 

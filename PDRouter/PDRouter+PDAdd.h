@@ -12,6 +12,6 @@
 
 - (void)registerEvents;
 
-- (void)deregisterEvents;
+- (void)unregisterEvents;
 
 @end
