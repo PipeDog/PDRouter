@@ -48,8 +48,8 @@
     if (!action.length) return;
 
     // Matching order
-    //   scheme://event/query
-    //   other url
+    //   1. scheme://event/query
+    //   2. unregistered url.
 
     NSURL *URL = [NSURL URLWithString:action];
     NSString *scheme = URL.scheme;
