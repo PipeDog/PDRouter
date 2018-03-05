@@ -40,12 +40,12 @@
 }
 
 #pragma mark - Send Action Methods
-- (void)sendAction:(NSString *)action {
-    [self sendAction:action to:nil];
+- (BOOL)sendAction:(NSString *)action {
+    return [self sendAction:action to:nil];
 }
 
-- (void)sendAction:(NSString *)action to:(nullable id)target {
-    if (!action.length) return;
+- (BOOL)sendAction:(NSString *)action to:(nullable id)target {
+    if (!action.length) return NO;
 
     // Matching order
     //   1. scheme://event/query
@@ -68,14 +68,17 @@
             for (PDRouterHandler handler in handlers) {
                 if (handler) handler(target, URL.queryItems);
             }
+            return YES;
         } else {
             // The event has not yet been registered.
             BOOL result = [self openURL:URL];
             if (!result) NSLog(@"Can not open url, url = %@", URL);
+            return result;
         }
     } else { // Other url.
         BOOL result = [self openURL:URL];
         if (!result) NSLog(@"Can not open url, url = %@", URL);
+        return result;
     }
 }
 

@@ -24,8 +24,8 @@ typedef void (^PDRouterHandler)(id _Nullable target, NSDictionary * _Nullable pa
 @property (nonatomic, copy) NSString *localScheme; // Custom scheme, this property is used to determine whether native processing is done.
 
 // Call these method to open native page or web page.
-- (void)sendAction:(NSString *)action;
-- (void)sendAction:(NSString *)action to:(nullable id)target;
+- (BOOL)sendAction:(NSString *)action;
+- (BOOL)sendAction:(NSString *)action to:(nullable id)target;
 
 // Register event with eventname.
 - (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler;
