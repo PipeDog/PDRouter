@@ -21,10 +21,21 @@
     return routerHelper;
 }
 
+- (BOOL)isUrlInWhiteList:(NSURL *)url {
+    if (!url || !url.absoluteString.length) return NO;
+    
+    if (![url.scheme isEqualToString:@"http"] &&
+        ![url.scheme isEqualToString:@"https"]) {
+        return NO;
+    }
+    // URL path check...
+    // Other URL checks...
+    return YES;
+}
+
 #pragma mark - PDRouterProtocol Methods
 - (BOOL)openURL:(NSURL *)url {
-    // Check the url is valid.
-    if (!url || !url.absoluteString.length) return NO;
+    if (![self isUrlInWhiteList:url]) return NO;
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UINavigationController *navigationController = (UINavigationController *)appDelegate.window.rootViewController;
