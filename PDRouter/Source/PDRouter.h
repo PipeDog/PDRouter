@@ -21,18 +21,19 @@ typedef void (^PDRouterHandler)(id _Nullable target, NSDictionary * _Nullable pa
 @property (class, strong, readonly) PDRouter *defaultRouter;
 
 @property (nonatomic, weak) id<PDRouterProtocol> delegate;
-@property (nonatomic, copy) NSString *localScheme; // Custom scheme, this property is used to determine whether native processing is done.
 
-// Call these method to open native page or web page.
+// Custom scheme and host, used to confirm whether a local event has been registered.
+@property (nonatomic, copy) NSString *scheme;
+@property (nonatomic, copy) NSString *host;
+
+// Send actions to trigger events, the param action is a link.
 - (BOOL)sendAction:(NSString *)action;
 - (BOOL)sendAction:(NSString *)action to:(nullable id)target;
 
-// Register event with eventname.
+// Register event with eventname, match URL path with eventname.
 - (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler;
-// Unregister event with eventname.
-- (void)off:(NSString *)event;
-// Unregister all events.
-- (void)offAll;
+- (void)off:(NSString *)event; // Unregister event with eventname.
+- (void)offAll; // Unregister all events.
 
 @end
 

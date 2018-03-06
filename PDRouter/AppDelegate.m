@@ -21,7 +21,8 @@
     // Override point for customization after application launch.
     
     [PDRouter defaultRouter].delegate = [PDRouterHelper defaultHelper];
-    [PDRouter defaultRouter].localScheme = @"pdsc";
+    [PDRouter defaultRouter].scheme = @"pipe";
+    [PDRouter defaultRouter].host = @"pipedog.com";
     [[PDRouter defaultRouter] registerEvents];
     return YES;
 }

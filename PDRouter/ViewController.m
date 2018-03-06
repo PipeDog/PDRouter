@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.    
 }
 
 - (IBAction)openURL:(id)sender {
@@ -26,11 +26,11 @@
 }
 
 - (IBAction)push:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pdsc://push?action=push&age=26" to:self];
+    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/push?action=push&age=26" to:self];
 }
 
 - (IBAction)pushOtherEvent:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pdsc://pushother?action=pushother&author=" to:nil];
+    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/pushother?action=pushother&author=" to:nil];
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -38,7 +38,7 @@
 }
 
 - (IBAction)present:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pdsc://present?action=present&author=http://www.baidu.com" to:nil];
+    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/present?action=present&author=http://www.baidu.com" to:nil];
 }
 
 - (void)didReceiveMemoryWarning {

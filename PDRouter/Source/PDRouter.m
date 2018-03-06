@@ -48,22 +48,23 @@
     if (!action.length) return NO;
 
     // Matching order
-    //   1. scheme://event/query
+    //   1. scheme://host/eventname/query
     //   2. unregistered url.
 
     NSURL *URL = [NSURL URLWithString:action];
     NSString *scheme = URL.scheme;
-    NSString *host = URL.host; // event
-    NSString __unused *path = URL.path;
+    NSString *host = URL.host;
+    NSString *path = URL.path; // eventname, eg: "/push"
     NSString __unused *query = URL.query;
     
-    if ([scheme isEqualToString:self.localScheme]) { // Matching scheme.
+    if ([scheme isEqualToString:self.scheme] &&
+        [host isEqualToString:self.host]) { // Matching scheme.
         // Check whether the event has been registered, and has handler.
-        BOOL hasHandlers = [self containsEvent:host];
+        BOOL hasHandlers = [self containsEvent:path];
         
         if (hasHandlers) {
             // The event has been registered.
-            NSMutableArray<PDRouterHandler> *handlers = self.listeners[host];
+            NSMutableArray<PDRouterHandler> *handlers = self.listeners[path];
 
             for (PDRouterHandler handler in handlers) {
                 if (handler) handler(target, URL.queryItems);
