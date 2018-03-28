@@ -26,7 +26,7 @@
 }
 
 - (IBAction)push:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/push?action=push&age=26" to:self];
+    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/push?action=push&age=26" to:self params:@{@"doc": @"file", @"key": @"value"}];
 }
 
 - (IBAction)pushOtherEvent:(id)sender {

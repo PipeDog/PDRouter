@@ -44,18 +44,17 @@
     return [self sendAction:action to:nil];
 }
 
-- (BOOL)sendAction:(NSString *)action to:(nullable id)target {
+- (BOOL)sendAction:(NSString *)action to:(id)target {
+    return [self sendAction:action to:target params:nil];
+}
+
+- (BOOL)sendAction:(NSString *)action to:(nullable id)target params:(NSDictionary *)params {
     if (!action.length) return NO;
-
-    // Matching order
-    //   1. scheme://host/eventname/query
-    //   2. unregistered url.
-
+    
     NSURL *URL = [NSURL URLWithString:action];
     NSString *scheme = URL.scheme;
     NSString *host = URL.host;
     NSString *path = URL.path; // eventname, eg: "/push"
-    NSString __unused *query = URL.query;
     
     if ([scheme isEqualToString:self.scheme] &&
         [host isEqualToString:self.host]) { // Matching scheme.
@@ -65,9 +64,15 @@
         if (hasHandlers) {
             // The event has been registered.
             NSMutableArray<PDRouterHandler> *handlers = self.listeners[path];
-
+            
+            NSMutableDictionary *paramsDict = [NSMutableDictionary dictionary];
+            [paramsDict addEntriesFromDictionary:params ?: @{}];
+            [paramsDict addEntriesFromDictionary:URL.queryItems];
+            
+            NSDictionary *paramsCopy = [paramsDict copy];
+            
             for (PDRouterHandler handler in handlers) {
-                if (handler) handler(target, URL.queryItems);
+                if (handler) handler(target, paramsCopy);
             }
             return YES;
         } else {

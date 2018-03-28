@@ -29,6 +29,7 @@ typedef void (^PDRouterHandler)(id _Nullable target, NSDictionary * _Nullable pa
 // Send actions to trigger events, the param action is a link.
 - (BOOL)sendAction:(NSString *)action;
 - (BOOL)sendAction:(NSString *)action to:(nullable id)target;
+- (BOOL)sendAction:(NSString *)action to:(nullable id)target params:(nullable NSDictionary *)params;
 
 // Register event with eventname, match URL path with eventname.
 - (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler;
