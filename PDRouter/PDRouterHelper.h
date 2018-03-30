@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PDRouter.h"
 
-@interface PDRouterHelper : NSObject <PDRouterProtocol>
+@interface PDRouterHelper : NSObject <PDRouterDelegate>
 
 @property (class, nonatomic, strong, readonly) PDRouterHelper *defaultHelper;
 

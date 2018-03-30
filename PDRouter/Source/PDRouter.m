@@ -31,24 +31,24 @@
 }
 
 + (PDRouter *)defaultRouter {
-    static PDRouter *defaultRouter;
+    static PDRouter *__defaultRouter;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        defaultRouter = [[self alloc] init];
+        __defaultRouter = [[self alloc] init];
     });
-    return defaultRouter;
+    return __defaultRouter;
 }
 
 #pragma mark - Send Action Methods
 - (BOOL)sendAction:(NSString *)action {
-    return [self sendAction:action to:nil];
+    return [self sendAction:action from:nil];
 }
 
-- (BOOL)sendAction:(NSString *)action to:(id)target {
-    return [self sendAction:action to:target params:nil];
+- (BOOL)sendAction:(NSString *)action from:(id)sender {
+    return [self sendAction:action from:sender params:@{}];
 }
 
-- (BOOL)sendAction:(NSString *)action to:(nullable id)target params:(NSDictionary *)params {
+- (BOOL)sendAction:(NSString *)action from:(id)sender params:(NSDictionary *)params {
     if (!action.length) return NO;
     
     NSURL *URL = [NSURL URLWithString:action];
@@ -72,7 +72,7 @@
             NSDictionary *paramsCopy = [paramsDict copy];
             
             for (PDRouterHandler handler in handlers) {
-                if (handler) handler(target, paramsCopy);
+                if (handler) handler(sender, paramsCopy);
             }
             return YES;
         } else {
@@ -89,7 +89,7 @@
 }
 
 - (BOOL)openURL:(NSURL *)url {
-    if ([self.delegate conformsToProtocol:@protocol(PDRouterProtocol)] ||
+    if ([self.delegate conformsToProtocol:@protocol(PDRouterDelegate)] ||
         [self.delegate respondsToSelector:@selector(openURL:)]) {
         return [self.delegate openURL:url];
     }
