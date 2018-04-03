@@ -26,11 +26,11 @@
 }
 
 - (IBAction)push:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/push?action=push&age=26" from:self params:@{@"doc": @"file", @"key": @"value"}];
+    [[PDRouter defaultRouter] sendAction:@"pdog://net.pipedog.com/push?action=push&age=26" from:self params:@{@"doc": @"file", @"key": @"value"}];
 }
 
 - (IBAction)pushOtherEvent:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/pushother?action=pushother&author=" from:nil];
+    [[PDRouter defaultRouter] sendAction:@"pdog://net.pipedog.com/pushother?action=pushother&author=" from:nil];
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -38,7 +38,7 @@
 }
 
 - (IBAction)present:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pipe://pipedog.com/present?action=present&author=http://www.baidu.com" from:nil];
+    [[PDRouter defaultRouter] sendAction:@"pdog://net.pipedog.com/present?action=present&author=http://www.baidu.com" from:nil];
 }
 
 - (void)didReceiveMemoryWarning {
