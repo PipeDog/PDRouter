@@ -35,6 +35,8 @@ typedef void (^PDRouterHandler)(id _Nullable sender, NSDictionary * _Nullable pa
 - (void)off:(NSString *)event;
 - (void)offAll;
 
+- (BOOL)hasEvent:(NSString *)event;
+
 @end
 
 NS_ASSUME_NONNULL_END

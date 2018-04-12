@@ -127,6 +127,10 @@
     [self.listeners removeAllObjects];
 }
 
+- (BOOL)hasEvent:(NSString *)event {
+    return [self containsEvent:event];
+}
+
 - (BOOL)containsEvent:(NSString *)event {
     if (!event.length) return NO;
     
