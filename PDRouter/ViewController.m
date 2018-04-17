@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "NSURL+PDAdd.h"
 #import "PDRouter.h"
+#import "PDRouteKeeper.h"
 
 @interface ViewController ()
 
@@ -22,7 +23,8 @@
 }
 
 - (IBAction)openURL:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"https://www.baidu.com"];
+//    [[PDRouter defaultRouter] sendAction:@"https://www.baidu.com"];
+    [[PDRouteKeeper defaultKeeper] sendAction:@"pdog://net.pipedog.com/testpage"];
 }
 
 - (IBAction)push:(id)sender {

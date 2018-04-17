@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PDRouter+PDAdd.h"
-#import "PDRouterHelper.h"
+#import "PDRouteKeeper.h"
 
 @interface AppDelegate ()
 
@@ -20,9 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [PDRouter defaultRouter].delegate = [PDRouterHelper defaultHelper];
+    [PDRouter defaultRouter].delegate = [PDRouteKeeper defaultKeeper];
     [PDRouter defaultRouter].host = @"pdog://net.pipedog.com";
     [[PDRouter defaultRouter] registerEvents];
+    
+    [[PDRouteKeeper defaultKeeper] bind:@"UIViewController" forEvent:@"/testpage"];
     return YES;
 }
 

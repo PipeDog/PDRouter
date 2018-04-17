@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^PDRouterHandler)(id _Nullable sender, NSDictionary * _Nullable parameters);
+typedef void (^PDRouterHandler)(id _Nullable sender, NSDictionary * _Nullable params);
 
 @protocol PDRouterDelegate <NSObject>
 
