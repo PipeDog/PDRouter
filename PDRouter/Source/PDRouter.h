@@ -24,12 +24,11 @@ typedef void (^PDRouterHandler)(id _Nullable sender, NSDictionary * _Nullable pa
 @property (class, strong, readonly) PDRouter *defaultRouter;
 
 @property (nonatomic, weak) id<PDRouterDelegate> delegate;
-@property (nonatomic, copy) NSString *scheme;
 @property (nonatomic, copy) NSString *host;
 
 - (BOOL)sendAction:(NSString *)action;
-- (BOOL)sendAction:(NSString *)action from:(nullable id)sender;
-- (BOOL)sendAction:(NSString *)action from:(nullable id)sender params:(nullable NSDictionary *)params;
+- (BOOL)sendAction:(NSString *)action params:(nullable NSDictionary *)params;
+- (BOOL)sendAction:(NSString *)action params:(nullable NSDictionary *)params from:(nullable id)sender;
 
 - (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler;
 - (void)off:(NSString *)event;

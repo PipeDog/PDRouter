@@ -41,23 +41,20 @@
 
 #pragma mark - Send Action Methods
 - (BOOL)sendAction:(NSString *)action {
-    return [self sendAction:action from:nil];
+    return [self sendAction:action params:nil];
 }
 
-- (BOOL)sendAction:(NSString *)action from:(id)sender {
-    return [self sendAction:action from:sender params:@{}];
+- (BOOL)sendAction:(NSString *)action params:(NSDictionary *)params {
+    return [self sendAction:action params:params from:nil];
 }
 
-- (BOOL)sendAction:(NSString *)action from:(id)sender params:(NSDictionary *)params {
+- (BOOL)sendAction:(NSString *)action params:(NSDictionary *)params from:(id)sender {    
     if (!action.length) return NO;
     
     NSURL *URL = [NSURL URLWithString:action];
-    NSString *scheme = URL.scheme;
-    NSString *host = URL.host;
     NSString *path = URL.path; // eventname, eg: "/push"
     
-    if ([scheme isEqualToString:self.scheme] &&
-        [host isEqualToString:self.host]) { // Matching scheme.
+    if ([action hasPrefix:self.host]) { // Matching host.
         // Check whether the event has been registered, and has handler.
         BOOL hasHandlers = [self containsEvent:path];
         
@@ -120,11 +117,11 @@
 - (void)off:(NSString *)event {
     if (!event.length) return;
     
-    [self.listeners removeObjectForKey:event];
+    [_listeners removeObjectForKey:event];
 }
 
 - (void)offAll {
-    [self.listeners removeAllObjects];
+    [_listeners removeAllObjects];
 }
 
 - (BOOL)hasEvent:(NSString *)event {
@@ -134,7 +131,7 @@
 - (BOOL)containsEvent:(NSString *)event {
     if (!event.length) return NO;
     
-    NSMutableArray *handlers = self.listeners[event];
+    NSMutableArray *handlers = _listeners[event];
     return (handlers.count > 0 ? YES : NO);
 }
 
