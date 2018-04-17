@@ -24,7 +24,7 @@
     [PDRouter defaultRouter].host = @"pdog://net.pipedog.com";
     [[PDRouter defaultRouter] registerEvents];
     
-    [[PDRouteKeeper defaultKeeper] bind:@"UIViewController" forEvent:@"/testpage"];
+//    [[PDRouteKeeper defaultKeeper] bind:@"UIViewController" forEvent:@"/testpage"];
     return YES;
 }
 

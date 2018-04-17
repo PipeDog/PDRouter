@@ -51,7 +51,7 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 }
 
 #pragma mark - PDRouterProtocol Methods
-- (BOOL)openURL:(NSURL *)url {
+- (BOOL)openURL:(NSURL *)url params:(NSDictionary *)params {
     if (![self isUrlInWhiteList:url]) return NO;
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -80,6 +80,7 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     if (!event.length) return;
 
     [self.pages removeObjectForKey:event];
+    [[PDRouter defaultRouter] off:event];
 }
 
 #pragma mark - Handle OpenURL Methods

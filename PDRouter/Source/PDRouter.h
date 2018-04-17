@@ -15,7 +15,7 @@ typedef void (^PDRouterHandler)(id _Nullable sender, NSDictionary * _Nullable pa
 
 @protocol PDRouterDelegate <NSObject>
 
-- (BOOL)openURL:(NSURL *)url; // Handle the url of the unregistered event.
+- (BOOL)openURL:(NSURL *)url params:(nullable NSDictionary *)params; // Handle the url of the unregistered event.
 
 @end
 

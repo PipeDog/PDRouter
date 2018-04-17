@@ -17,7 +17,6 @@
 		EC9291E9204AECFA00C31092 /* PDRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291E8204AECFA00C31092 /* PDRouterTests.m */; };
 		EC9291F4204AECFA00C31092 /* PDRouterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291F3204AECFA00C31092 /* PDRouterUITests.m */; };
 		EC929204204AEDE200C31092 /* PDRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC929203204AEDE200C31092 /* PDRouter.m */; };
-		EC92920A204BC0EC00C31092 /* NSURL+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = EC929209204BC0EC00C31092 /* NSURL+PDAdd.m */; };
 		EC92920F204BEA5F00C31092 /* PDRouter+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = EC92920E204BEA5F00C31092 /* PDRouter+PDAdd.m */; };
 		EC929215204BF30D00C31092 /* PDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC929214204BF30D00C31092 /* PDWebViewController.m */; };
 /* End PBXBuildFile section */
@@ -60,8 +59,6 @@
 		EC9291F5204AECFA00C31092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC929202204AEDE200C31092 /* PDRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDRouter.h; sourceTree = "<group>"; };
 		EC929203204AEDE200C31092 /* PDRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouter.m; sourceTree = "<group>"; };
-		EC929208204BC0EC00C31092 /* NSURL+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+PDAdd.h"; sourceTree = "<group>"; };
-		EC929209204BC0EC00C31092 /* NSURL+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+PDAdd.m"; sourceTree = "<group>"; };
 		EC92920D204BEA5F00C31092 /* PDRouter+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PDRouter+PDAdd.h"; sourceTree = "<group>"; };
 		EC92920E204BEA5F00C31092 /* PDRouter+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PDRouter+PDAdd.m"; sourceTree = "<group>"; };
 		EC929213204BF30D00C31092 /* PDWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDWebViewController.h; sourceTree = "<group>"; };
@@ -159,8 +156,6 @@
 			children = (
 				EC929202204AEDE200C31092 /* PDRouter.h */,
 				EC929203204AEDE200C31092 /* PDRouter.m */,
-				EC929208204BC0EC00C31092 /* NSURL+PDAdd.h */,
-				EC929209204BC0EC00C31092 /* NSURL+PDAdd.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -303,7 +298,6 @@
 				EC929215204BF30D00C31092 /* PDWebViewController.m in Sources */,
 				EC9291DF204AECFA00C31092 /* main.m in Sources */,
 				EC929204204AEDE200C31092 /* PDRouter.m in Sources */,
-				EC92920A204BC0EC00C31092 /* NSURL+PDAdd.m in Sources */,
 				EC92920F204BEA5F00C31092 /* PDRouter+PDAdd.m in Sources */,
 				EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */,
 			);

@@ -7,7 +7,28 @@
 //
 
 #import "PDRouter.h"
-#import "NSURL+PDAdd.h"
+
+@interface NSURL (PDAdd)
+
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *queryItems;
+
+@end
+
+@implementation NSURL (PDAdd)
+
+- (NSDictionary <NSString *, NSString *>*)queryItems {
+    NSURLComponents *components = [NSURLComponents componentsWithString:self.absoluteString];
+    NSArray<NSURLQueryItem *> *queryItems = components.queryItems;
+    NSMutableDictionary<NSString *, id> *queryDict = [NSMutableDictionary dictionary];
+    
+    for (NSURLQueryItem *item in queryItems) {
+        if (!item.name.length || !item.value) continue;
+        [queryDict setObject:item.value forKey:item.name];
+    }
+    return [queryDict copy];
+}
+
+@end
 
 @interface PDRouter ()
 
@@ -74,21 +95,21 @@
             return YES;
         } else {
             // The event has not yet been registered.
-            BOOL result = [self openURL:URL];
+            BOOL result = [self openURL:URL params:params];
             if (!result) NSLog(@"Can not open url, url = %@", URL);
             return result;
         }
     } else { // Other url.
-        BOOL result = [self openURL:URL];
+        BOOL result = [self openURL:URL params:params];
         if (!result) NSLog(@"Can not open url, url = %@", URL);
         return result;
     }
 }
 
-- (BOOL)openURL:(NSURL *)url {
+- (BOOL)openURL:(NSURL *)url params:(NSDictionary *)params {
     if ([self.delegate conformsToProtocol:@protocol(PDRouterDelegate)] ||
         [self.delegate respondsToSelector:@selector(openURL:)]) {
-        return [self.delegate openURL:url];
+        return [self.delegate openURL:url params:params];
     }
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         if (@available(iOS 10, *)) {
