@@ -106,7 +106,7 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     BOOL hasBindPageForEvent = (self.pages[path] ? YES : NO);
     
     if (isRouterHost && !eventHasRegisted && hasBindPageForEvent) {
-        [[PDRouter defaultRouter] on:path completionHandler:^(id  _Nullable sender, NSDictionary * _Nullable params) {
+        [[PDRouter defaultRouter] on:path actionHandler:^(id  _Nullable sender, NSDictionary * _Nullable params) {
             NSString *pageName = self.pages[path];
             Class cls = NSClassFromString(pageName);
             UIViewController *page = [[cls alloc] init];

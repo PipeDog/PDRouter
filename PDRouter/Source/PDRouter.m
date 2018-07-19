@@ -51,11 +51,24 @@
     [self offAll];
 }
 
+static PDRouter *__defaultRouter = nil;
+
 + (PDRouter *)defaultRouter {
-    static PDRouter *__defaultRouter;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __defaultRouter = [[self alloc] init];
+        if (__defaultRouter == nil) {
+            __defaultRouter = [[self alloc] init];
+        }
+    });
+    return __defaultRouter;
+}
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (__defaultRouter == nil) {
+            __defaultRouter = [super allocWithZone:zone];
+        }
     });
     return __defaultRouter;
 }
@@ -123,7 +136,7 @@
 }
 
 #pragma mark - Register Event Methods
-- (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler {
+- (void)on:(NSString *)event actionHandler:(PDRouterHandler)handler {
     if (!event.length) return;
     
     NSMutableArray<PDRouterHandler> *handlers = self.listeners[event];

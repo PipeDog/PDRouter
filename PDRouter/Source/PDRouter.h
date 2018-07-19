@@ -30,7 +30,7 @@ typedef void (^PDRouterHandler)(id _Nullable sender, NSDictionary * _Nullable pa
 - (BOOL)sendAction:(NSString *)action params:(nullable NSDictionary *)params;
 - (BOOL)sendAction:(NSString *)action params:(nullable NSDictionary *)params from:(nullable id)sender;
 
-- (void)on:(NSString *)event completionHandler:(PDRouterHandler)handler;
+- (void)on:(NSString *)event actionHandler:(PDRouterHandler)handler;
 - (void)off:(NSString *)event;
 - (void)offAll;
 
