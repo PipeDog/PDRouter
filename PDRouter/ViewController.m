@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 #import "PDRouter.h"
-#import "PDRouteKeeper.h"
+#import "PDRouterAgent.h"
+#import "PDPage.h"
+#import "PDTestViewController.h"
 
 @interface ViewController ()
 
@@ -18,12 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.    
+    // Do any additional setup after loading the view, typically from a nib.
+    if (self.navigationController) {
+        [[PDRouterAgent defaultAgent] setNavigationController:self.navigationController];
+    }
 }
 
 - (IBAction)openURL:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"https://www.baidu.com"];
-//    [[PDRouteKeeper defaultKeeper] sendAction:@"pdog://net.pipedog.com/testpage"];
+    PDRouterOpen([PDTestViewController class], @{@"title": @"测试"});
 }
 
 - (IBAction)push:(id)sender {

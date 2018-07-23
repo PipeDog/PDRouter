@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "PDRouter+PDAdd.h"
-#import "PDRouteKeeper.h"
+#import "PDRouterAgent.h"
+#import "PDTestViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,15 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    [PDRouter defaultRouter].delegate = [PDRouteKeeper defaultKeeper];
-    [PDRouter defaultRouter].host = @"pdog://net.pipedog.com";
-    [[PDRouter defaultRouter] registerEvents];
-    
-//    [[PDRouteKeeper defaultKeeper] bind:@"UIViewController" forEvent:@"/testpage"];
+
+    PDRouterRegister(PDTestViewController);
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -1,21 +1,21 @@
 //
-//  PDWebViewController.m
+//  PDWebPage.m
 //  PDRouter
 //
-//  Created by liang on 2018/3/4.
+//  Created by liang on 2018/7/19.
 //  Copyright © 2018年 PipeDog. All rights reserved.
 //
 
-#import "PDWebViewController.h"
+#import "PDWebPage.h"
 
-@interface PDWebViewController () <UIWebViewDelegate>
+@interface PDWebPage () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *progressView;
 
 @end
 
-@implementation PDWebViewController
+@implementation PDWebPage
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,7 +62,7 @@
         CGSize size = CGSizeMake(40, 40);
         CGFloat left = (CGRectGetWidth(self.webView.frame) - size.width) / 2.f;
         CGFloat top = (CGRectGetHeight(self.webView.frame) - size.height) / 2.f;
-
+        
         _progressView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _progressView.frame = CGRectMake(left, top, size.width, size.height);
         [self.webView addSubview:_progressView];
