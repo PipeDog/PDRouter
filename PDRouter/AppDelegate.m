@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "PDRouterAgent.h"
-#import "PDTestViewController.h"
+#import "PDRouterAgent+PDAdd.h"
 
 @interface AppDelegate ()
 
@@ -19,8 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
-    PDRouterRegister(PDTestViewController);
+    [[PDRouterAgent defaultAgent] registerEvents];
     return YES;
 }
 

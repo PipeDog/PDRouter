@@ -12,7 +12,10 @@
 #import "PDPage.h"
 #import "PDTestViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, copy) NSArray *dataArray;
 
 @end
 
@@ -26,30 +29,64 @@
     }
 }
 
-- (IBAction)openURL:(id)sender {
-    PDRouterOpen([PDTestViewController class], @{@"title": @"测试"});
+#pragma mark - UITableView Methods
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataArray.count;
 }
 
-- (IBAction)push:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pdog://net.pipedog.com/push?action=push&age=26" params:@{@"doc": @"file", @"key": @"value"} from:self];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse" forIndexPath:indexPath];
+    cell.textLabel.text = self.dataArray[indexPath.row];
+    return cell;
 }
 
-- (IBAction)pushOtherEvent:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pdog://net.pipedog.com/pushother?action=pushother&author="];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
+        // push
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/push"] routerParams:@{@"title": @"push"}];
+    } else if (indexPath.row == 1) {
+        // present
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/present"] routerParams:nil];
+    } else if (indexPath.row == 2) {
+        // dismiss
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else if (indexPath.row == 3) {
+        // web
+        [[PDRouter defaultRouter] openURL:@"https://www.baidu.com" routerParams:nil];
+    } else if (indexPath.row == 4) {
+        // group/first
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/first"] routerParams:@{@"title": @"first"}];
+    } else if (indexPath.row == 5) {
+        // group/second
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/second"] routerParams:@{@"title": @"second"}];
+    } else if (indexPath.row == 6) {
+        // group/third
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/third?title=third"] routerParams:@{@"testKey": @"testValue"}];
+    } else if (indexPath.row == 7) {
+        // pageClass/register
+        PDRouterRegister(PDTestViewController);
+    } else if (indexPath.row == 8) {
+        // pageClass/open
+        PDRouterOpen(PDTestViewController, @{@"inputKey": @"inputValue"});
+    }
 }
 
-- (IBAction)dismiss:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+#pragma mark - Getter Methods
+- (NSArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = @[@"push",
+                       @"present",
+                       @"dismiss",
+                       @"web",
+                       @"group/first",
+                       @"group/second",
+                       @"group/third",
+                       @"pageClass/register",
+                       @"pageClass/open"];
+    }
+    return _dataArray;
 }
-
-- (IBAction)present:(id)sender {
-    [[PDRouter defaultRouter] sendAction:@"pdog://net.pipedog.com/present?action=present&author=http://www.baidu.com"];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

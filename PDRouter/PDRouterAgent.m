@@ -10,9 +10,7 @@
 #import <objc/runtime.h>
 #import "PDPage.h"
 #import "PDWebPage.h"
-#import "PDRouter+PDAdd.h"
-
-#define PDRouterHost @"pdog://net.pipedog.com"
+#import "PDRouter.h"
 
 static inline BOOL isKindOfClass(Class parent, Class child) {
     for (Class cls = child; cls; cls = class_getSuperclass(cls)) {
@@ -45,7 +43,6 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     if (self) {
         [PDRouter defaultRouter].delegate = self;
         [PDRouter defaultRouter].host = @"pdog://net.pipedog.com";
-        [[PDRouter defaultRouter] registerEvents];
     }
     return self;
 }
@@ -59,9 +56,9 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     // Format to url path.
     NSString *event = [NSString stringWithFormat:@"/%@", NSStringFromClass([pageClass class])];
     
-    [[PDRouter defaultRouter] on:event actionHandler:^(id  _Nullable sender, NSDictionary * _Nullable params) {
+    [[PDRouter defaultRouter] on:event eventHandler:^(NSDictionary *routerParams) {
         PDPage *page = (PDPage *)[[[pageClass class] alloc] init];
-        page.routerParams = params;
+        page.routerParams = routerParams;
         [self.navigationController pushViewController:page animated:YES];
     }];
 }
@@ -73,24 +70,27 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     }
     
     NSString *event = [NSString stringWithFormat:@"%@/%@", PDRouterHost, NSStringFromClass([pageClass class])];
-    [[PDRouter defaultRouter] sendAction:event params:params];
+    [[PDRouter defaultRouter] openURL:event routerParams:params];
 }
 
 #pragma mark - PDRouterDelegate Methods
-- (BOOL)openURL:(NSURL *)url params:(NSDictionary *)params {
-    if ([url.absoluteString hasPrefix:@"http"]) {
+- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    NSLog(@"didFinishOpenURL, args = [%@, %@]", URLString, routerParams);
+}
+
+- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    NSLog(@"didFailOpenURL, args = [%@, %@]", URLString, routerParams);
+    
+    if ([URLString hasPrefix:@"http"]) {
         PDWebPage *webPage = [[PDWebPage alloc] init];
         [self.navigationController pushViewController:webPage animated:YES];
         
-        [webPage loadRequest:[NSURLRequest requestWithURL:url]];
-        return YES;
+        [webPage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:URLString]]];
     }
-    return NO;
 }
 
 #pragma mark - Setter Methods
 - (void)setNavigationController:(UINavigationController *)navigationController {
-    NSAssert(navigationController != nil, @"Param navigationController can not be nil!");
     _navigationController = navigationController;
 }
 

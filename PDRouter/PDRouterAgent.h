@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define PDRouterHost @"pdog://net.pipedog.com"
+
 @interface PDRouterAgent : NSObject
 
 @property (class, strong, readonly) PDRouterAgent *defaultAgent;
@@ -18,6 +20,6 @@
 - (void)openPage:(Class)pageClass params:(NSDictionary *)params;
 
 #define PDRouterRegister(pageClass) [[PDRouterAgent defaultAgent] registerPage:[pageClass class]]
-#define PDRouterOpen(pageClass, args) [[PDRouterAgent defaultAgent] openPage:pageClass params:args]
+#define PDRouterOpen(pageClass, args) [[PDRouterAgent defaultAgent] openPage:[pageClass class] params:args]
 
 @end

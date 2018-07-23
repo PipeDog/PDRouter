@@ -2,7 +2,7 @@
 //  PDRouter.m
 //  PDRouter
 //
-//  Created by liang on 2018/3/3.
+//  Created by liang on 2018/7/23.
 //  Copyright © 2018年 PipeDog. All rights reserved.
 //
 
@@ -30,26 +30,18 @@
 
 @end
 
-@interface PDRouter ()
+@interface PDRouter () {
+    struct {
+        unsigned didFinishOpenURL : 1;
+        unsigned didFailOpenURL : 1;
+    } _delegateHas;
+}
 
-/*
- @eg:
-    listeners :
-    {
-        event1: [handler1, handler2, ...],
-        event2: [handler1, handler2, ...],
-        ...
-    }
- */
-@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<PDRouterHandler> *> *listeners;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, PDRouterEventHandler> *listeners;
 
 @end
 
 @implementation PDRouter
-
-- (void)dealloc {
-    [self offAll];
-}
 
 static PDRouter *__defaultRouter = nil;
 
@@ -73,104 +65,76 @@ static PDRouter *__defaultRouter = nil;
     return __defaultRouter;
 }
 
-#pragma mark - Send Action Methods
-- (BOOL)sendAction:(NSString *)action {
-    return [self sendAction:action params:nil];
+#pragma mark - Event Handler Methods
+- (void)on:(NSString *)fullPath eventHandler:(PDRouterEventHandler)eventHandler {
+    NSAssert(fullPath != nil, @"Param fullPath can not be nil!");
+    [self.listeners setValue:[eventHandler copy] forKey:fullPath];
 }
 
-- (BOOL)sendAction:(NSString *)action params:(NSDictionary *)params {
-    return [self sendAction:action params:params from:nil];
-}
-
-- (BOOL)sendAction:(NSString *)action params:(NSDictionary *)params from:(id)sender {    
-    if (!action.length) return NO;
+- (void)onGroup:(NSString *)basePath eventHandler:(void (^)(PDRouterGroup *))eventHandler {
+    NSAssert(basePath != nil, @"Param basePath can not be nil!");
     
-    NSURL *URL = [NSURL URLWithString:action];
-    NSString *path = URL.path; // eventname, eg: "/push"
+    PDRouterGroup *group = [[PDRouterGroup alloc] init];
     
-    if ([action hasPrefix:self.host]) { // Matching host.
-        // Check whether the event has been registered, and has handler.
-        BOOL hasHandlers = [self containsEvent:path];
-        
-        if (hasHandlers) {
-            // The event has been registered.
-            NSMutableArray<PDRouterHandler> *handlers = self.listeners[path];
-            
-            NSMutableDictionary *paramsDict = [NSMutableDictionary dictionary];
-            [paramsDict addEntriesFromDictionary:params ?: @{}];
-            [paramsDict addEntriesFromDictionary:URL.queryItems];
-            
-            NSDictionary *paramsCopy = [paramsDict copy];
-            
-            for (PDRouterHandler handler in handlers) {
-                if (handler) handler(sender, paramsCopy);
-            }
-            return YES;
-        } else {
-            // The event has not yet been registered.
-            BOOL result = [self openURL:URL params:params];
-            if (!result) NSLog(@"Can not open url, url = %@", URL);
-            return result;
-        }
-    } else { // Other url.
-        BOOL result = [self openURL:URL params:params];
-        if (!result) NSLog(@"Can not open url, url = %@", URL);
-        return result;
+    if (eventHandler) eventHandler(group);
+    
+    NSArray<NSString *> *allKeys = [group.listeners allKeys];
+    
+    for (NSString *relativePath in allKeys) {
+        NSString *fullPath = [basePath stringByAppendingString:relativePath];
+        void (^handler)(NSDictionary *) = group.listeners[relativePath];
+        [self.listeners setValue:handler forKey:fullPath];
     }
 }
 
-- (BOOL)openURL:(NSURL *)url params:(NSDictionary *)params {
-    if ([self.delegate conformsToProtocol:@protocol(PDRouterDelegate)] ||
-        [self.delegate respondsToSelector:@selector(openURL:)]) {
-        return [self.delegate openURL:url params:params];
-    }
-    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        if (@available(iOS 10, *)) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:url];
-        }
-        return YES;
-    }
-    return NO;
-}
-
-#pragma mark - Register Event Methods
-- (void)on:(NSString *)event actionHandler:(PDRouterHandler)handler {
-    if (!event.length) return;
+- (BOOL)openURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    NSURL *URL = [NSURL URLWithString:URLString];
     
-    NSMutableArray<PDRouterHandler> *handlers = self.listeners[event];
-    if (!handlers) {
-        handlers = [NSMutableArray array];
-        [self.listeners setObject:handlers forKey:event];
+    NSString *host = [NSString stringWithFormat:@"%@://%@", URL.scheme, URL.host];
+    if (![host isEqualToString:self.host]) {
+        [self didFailOpenURL:URLString routerParams:routerParams];
+        return NO;
+    }
+
+    NSString *path = URL.path;
+    void (^eventHandler)(NSDictionary *) = self.listeners[path];
+    if (!eventHandler) {
+        [self didFailOpenURL:URLString routerParams:routerParams];
+        return NO;
     }
     
-    if (handler) [handlers addObject:handler];
-}
-
-- (void)off:(NSString *)event {
-    if (!event.length) return;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params addEntriesFromDictionary:routerParams ?: @{}];
+    [params addEntriesFromDictionary:URL.queryItems];
     
-    [_listeners removeObjectForKey:event];
+    eventHandler(params);
+    [self didFinishOpenURL:URLString routerParams:routerParams];
+    return YES;
 }
 
-- (void)offAll {
-    [_listeners removeAllObjects];
+#pragma mark - Throw Out Methods
+- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    if (_delegateHas.didFinishOpenURL) {
+        [self.delegate didFinishOpenURL:URLString routerParams:routerParams];
+    }
 }
 
-- (BOOL)hasEvent:(NSString *)event {
-    return [self containsEvent:event];
+- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    if (_delegateHas.didFailOpenURL) {
+        [self.delegate didFailOpenURL:URLString routerParams:routerParams];
+    }
 }
 
-- (BOOL)containsEvent:(NSString *)event {
-    if (!event.length) return NO;
+#pragma mark - Setter Methods
+- (void)setDelegate:(id<PDRouterDelegate>)delegate {
+    _delegate = delegate;
     
-    NSMutableArray *handlers = _listeners[event];
-    return (handlers.count > 0 ? YES : NO);
+    _delegateHas.didFinishOpenURL = [_delegate respondsToSelector:@selector(didFinishOpenURL:routerParams:)];
+    _delegateHas.didFailOpenURL = [_delegate respondsToSelector:@selector(didFailOpenURL:routerParams:)];
 }
 
 #pragma mark - Getter Methods
-- (NSMutableDictionary<NSString *, NSMutableArray<PDRouterHandler> *> *)listeners {
+- (NSMutableDictionary<NSString *, PDRouterEventHandler> *)listeners {
     if (!_listeners) {
         _listeners = [NSMutableDictionary dictionary];
     }
