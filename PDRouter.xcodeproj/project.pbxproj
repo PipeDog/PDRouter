@@ -123,20 +123,13 @@
 			isa = PBXGroup;
 			children = (
 				EC929201204AED7D00C31092 /* Source */,
+				ECBC02C72105E04D00214580 /* Pages */,
 				EC9291CF204AECFA00C31092 /* AppDelegate.h */,
 				EC9291D0204AECFA00C31092 /* AppDelegate.m */,
-				ECBC026D2100B28500214580 /* PDPage.h */,
-				ECBC026E2100B28500214580 /* PDPage.m */,
 				ECBC027621059D8E00214580 /* PDRouterAgent.h */,
 				ECBC027721059D8E00214580 /* PDRouterAgent.m */,
 				ECBC02C42105D0C600214580 /* PDRouterAgent+PDAdd.h */,
 				ECBC02C52105D0C600214580 /* PDRouterAgent+PDAdd.m */,
-				ECBC02732100BC2600214580 /* PDTestViewController.h */,
-				ECBC02742100BC2600214580 /* PDTestViewController.m */,
-				ECBC02702100BA3300214580 /* PDWebPage.h */,
-				ECBC02712100BA3300214580 /* PDWebPage.m */,
-				EC9291D2204AECFA00C31092 /* ViewController.h */,
-				EC9291D3204AECFA00C31092 /* ViewController.m */,
 				EC9291D5204AECFA00C31092 /* Main.storyboard */,
 				EC9291D8204AECFA00C31092 /* Assets.xcassets */,
 				EC9291DA204AECFA00C31092 /* LaunchScreen.storyboard */,
@@ -173,6 +166,21 @@
 				ECBC02C02105C3A400214580 /* PDRouterGroup.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		ECBC02C72105E04D00214580 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				ECBC02732100BC2600214580 /* PDTestViewController.h */,
+				ECBC02742100BC2600214580 /* PDTestViewController.m */,
+				ECBC026D2100B28500214580 /* PDPage.h */,
+				ECBC026E2100B28500214580 /* PDPage.m */,
+				ECBC02702100BA3300214580 /* PDWebPage.h */,
+				ECBC02712100BA3300214580 /* PDWebPage.m */,
+				EC9291D2204AECFA00C31092 /* ViewController.h */,
+				EC9291D3204AECFA00C31092 /* ViewController.m */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
