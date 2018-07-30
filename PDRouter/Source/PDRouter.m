@@ -60,6 +60,7 @@
 
 @interface PDRouter () {
     struct {
+        unsigned tryOpenUnregisteredURL : 1;
         unsigned didFinishOpenURL : 1;
         unsigned didFailOpenURL : 1;
     } _delegateHas;
@@ -120,15 +121,13 @@ static PDRouter *__defaultRouter = nil;
     
     NSString *host = [NSString stringWithFormat:@"%@://%@", URL.scheme, URL.host];
     if (![host isEqualToString:self.host]) {
-        [self didFailOpenURL:URLString routerParams:routerParams];
-        return NO;
+        return [self tryOpenUnregisteredURL:URLString routerParams:routerParams];
     }
 
     NSString *path = URL.path;
     void (^eventHandler)(NSDictionary *) = self.listeners[path];
     if (!eventHandler) {
-        [self didFailOpenURL:URLString routerParams:routerParams];
-        return NO;
+        return [self tryOpenUnregisteredURL:URLString routerParams:routerParams];
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -136,27 +135,38 @@ static PDRouter *__defaultRouter = nil;
     [params addEntriesFromDictionary:URL.queryItems];
     
     eventHandler(params);
-    [self didFinishOpenURL:URLString routerParams:routerParams];
+
+    if (_delegateHas.didFinishOpenURL) {
+        [self.delegate didFinishOpenURL:URLString routerParams:routerParams];
+    }
     return YES;
 }
 
 #pragma mark - Throw Out Methods
-- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    if (_delegateHas.didFinishOpenURL) {
-        [self.delegate didFinishOpenURL:URLString routerParams:routerParams];
-    }
-}
+- (BOOL)tryOpenUnregisteredURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    BOOL result = NO;
 
-- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    if (_delegateHas.didFailOpenURL) {
-        [self.delegate didFailOpenURL:URLString routerParams:routerParams];
+    if (_delegateHas.tryOpenUnregisteredURL) {
+        result = [self.delegate tryOpenUnregisteredURL:URLString routerParams:routerParams];
     }
+    
+    if (result) {
+        if (_delegateHas.didFinishOpenURL) {
+            [self.delegate didFinishOpenURL:URLString routerParams:routerParams];
+        }
+    } else {
+        if (_delegateHas.didFailOpenURL) {
+            [self.delegate didFailOpenURL:URLString routerParams:routerParams];
+        }
+    }
+    return result;
 }
 
 #pragma mark - Setter Methods
 - (void)setDelegate:(id<PDRouterDelegate>)delegate {
     _delegate = delegate;
     
+    _delegateHas.tryOpenUnregisteredURL = [_delegate respondsToSelector:@selector(tryOpenUnregisteredURL:routerParams:)];
     _delegateHas.didFinishOpenURL = [_delegate respondsToSelector:@selector(didFinishOpenURL:routerParams:)];
     _delegateHas.didFailOpenURL = [_delegate respondsToSelector:@selector(didFailOpenURL:routerParams:)];
 }

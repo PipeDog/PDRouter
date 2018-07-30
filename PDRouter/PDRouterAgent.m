@@ -74,21 +74,24 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 }
 
 #pragma mark - PDRouterDelegate Methods
-- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    NSLog(@"didFinishOpenURL, args = [%@, %@]", URLString, routerParams);
-}
-
-- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    NSLog(@"didFailOpenURL, args = [%@, %@]", URLString, routerParams);
-    
+- (BOOL)tryOpenUnregisteredURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
     if ([URLString hasPrefix:@"http"]) {
         PDWebPage *webPage = [[PDWebPage alloc] init];
         [self.navigationController pushViewController:webPage animated:YES];
         
         [webPage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:URLString]]];
+        return YES;
     } else {
-        NSLog(@"Not registered yet.");
+        return NO;
     }
+}
+
+- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    NSLog(@"✌️✌️✌️didFinishOpenURL, args = [%@, %@]", URLString, routerParams);
+}
+
+- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    NSLog(@"❌❌❌didFailOpenURL, args = [%@, %@]", URLString, routerParams);
 }
 
 #pragma mark - Setter Methods

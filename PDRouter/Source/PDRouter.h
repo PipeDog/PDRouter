@@ -14,6 +14,8 @@ typedef void (^PDRouterEventHandler)(NSDictionary *routerParams);
 @protocol PDRouterDelegate <NSObject>
 
 @optional
+// Implement this method to handle unregistered urls.
+- (BOOL)tryOpenUnregisteredURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
 - (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
 - (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
 
