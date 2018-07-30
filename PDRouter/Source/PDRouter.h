@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PDRouterGroup.h"
 
+typedef void (^PDRouterEventHandler)(NSDictionary *routerParams);
+
+/// Router throw events.
 @protocol PDRouterDelegate <NSObject>
 
 @optional
@@ -17,6 +19,16 @@
 
 @end
 
+/// Group implement.
+@protocol PDRouterGroup <NSObject>
+
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, PDRouterEventHandler> *listeners;
+
+- (void)on:(NSString *)relativePath eventHandler:(PDRouterEventHandler)eventHandler;
+
+@end
+
+/// Router.
 @interface PDRouter : NSObject
 
 @property (class, strong, readonly) PDRouter *defaultRouter;
@@ -27,7 +39,7 @@
 
 - (void)on:(NSString *)fullPath eventHandler:(PDRouterEventHandler)eventHandler;
 
-- (void)onGroup:(NSString *)basePath eventHandler:(void (^)(PDRouterGroup *group))eventHandler;
+- (void)onGroup:(NSString *)basePath eventHandler:(void (^)(id<PDRouterGroup> group))eventHandler;
 
 - (BOOL)openURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
 

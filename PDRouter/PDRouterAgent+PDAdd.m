@@ -33,8 +33,8 @@
     }];
 
     // Group register.
-    [router onGroup:@"/group" eventHandler:^(PDRouterGroup *group) {
-        
+    [router onGroup:@"/group" eventHandler:^(id<PDRouterGroup> group) {
+                
         [group on:@"/first" eventHandler:^(NSDictionary *routerParams) {
             PDTestViewController *page = [[PDTestViewController alloc] init];
             page.routerParams = routerParams;

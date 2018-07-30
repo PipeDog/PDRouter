@@ -30,6 +30,34 @@
 
 @end
 
+@interface PDRouterGroup : NSObject <PDRouterGroup> {
+    NSMutableDictionary<NSString *, PDRouterEventHandler> *_listeners;
+}
+
+@end
+
+@implementation PDRouterGroup
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _listeners = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
+- (void)on:(NSString *)relativePath eventHandler:(void (^)(NSDictionary *routerParams))eventHandler {
+    NSAssert(relativePath != nil, @"Param relativePath can not be nil!");
+    [_listeners setValue:[eventHandler copy] forKey:relativePath];
+}
+
+#pragma mark - Getter Methods
+- (NSDictionary<NSString *,PDRouterEventHandler> *)listeners {
+    return [_listeners copy];
+}
+
+@end
+
 @interface PDRouter () {
     struct {
         unsigned didFinishOpenURL : 1;
@@ -71,7 +99,7 @@ static PDRouter *__defaultRouter = nil;
     [self.listeners setValue:[eventHandler copy] forKey:fullPath];
 }
 
-- (void)onGroup:(NSString *)basePath eventHandler:(void (^)(PDRouterGroup *))eventHandler {
+- (void)onGroup:(NSString *)basePath eventHandler:(void (^)(id<PDRouterGroup>))eventHandler {
     NSAssert(basePath != nil, @"Param basePath can not be nil!");
     
     PDRouterGroup *group = [[PDRouterGroup alloc] init];

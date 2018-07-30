@@ -86,6 +86,8 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
         [self.navigationController pushViewController:webPage animated:YES];
         
         [webPage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:URLString]]];
+    } else {
+        NSLog(@"Not registered yet.");
     }
 }
 
