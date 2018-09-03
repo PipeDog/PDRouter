@@ -45,7 +45,7 @@
     
     if (indexPath.row == 0) {
         // push
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/push"] routerParams:@{@"title": @"push"}];
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/push"] routerParams:@{@"title": @"push跳转"}];
     } else if (indexPath.row == 1) {
         // present
         [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/present"] routerParams:nil];
@@ -57,19 +57,19 @@
         [[PDRouter defaultRouter] openURL:@"https://www.baidu.com" routerParams:nil];
     } else if (indexPath.row == 4) {
         // group/first
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/first"] routerParams:@{@"title": @"first"}];
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/first"] routerParams:@{@"title": @"first页面", @"测试": @"测试"}];
     } else if (indexPath.row == 5) {
         // group/second
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/second"] routerParams:@{@"title": @"second"}];
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/second"] routerParams:@{@"title": @"second页面"}];
     } else if (indexPath.row == 6) {
         // group/third
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/third?title=third"] routerParams:@{@"testKey": @"testValue"}];
+        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/third?title=third"] routerParams:@{@"testKey": @"testValue值"}];
     } else if (indexPath.row == 7) {
         // pageClass/register
         PDRouterRegister(PDTestViewController);
     } else if (indexPath.row == 8) {
         // pageClass/open
-        PDRouterOpen(PDTestViewController, @{@"inputKey": @"inputValue"});
+        PDRouterOpen(PDTestViewController, @{@"inputKey": @"inputValue值"});
     }
 }
 

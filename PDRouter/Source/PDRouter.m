@@ -30,6 +30,21 @@
 
 @end
 
+
+@interface NSString (PDAdd)
+
+- (NSString *)encodeWithURLQueryAllowedCharacterSet;
+
+@end
+
+@implementation NSString (PDAdd)
+
+- (NSString *)encodeWithURLQueryAllowedCharacterSet {
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
+@end
+
 @interface PDRouterGroup : NSObject <PDRouterGroup> {
     NSMutableDictionary<NSString *, PDRouterEventHandler> *_listeners;
 }
@@ -117,7 +132,7 @@ static PDRouter *__defaultRouter = nil;
 }
 
 - (BOOL)openURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    NSURL *URL = [NSURL URLWithString:URLString];
+    NSURL *URL = [NSURL URLWithString:[URLString encodeWithURLQueryAllowedCharacterSet]];
     
     NSString *host = [NSString stringWithFormat:@"%@://%@", URL.scheme, URL.host];
     if (![host isEqualToString:self.host]) {
