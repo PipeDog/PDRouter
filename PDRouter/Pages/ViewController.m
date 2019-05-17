@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "PDRouter.h"
-#import "PDRouterAgent.h"
 #import "PDPage.h"
 #import "PDTestViewController.h"
 
@@ -24,8 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    if (self.navigationController) {
-        [[PDRouterAgent defaultAgent] setNavigationController:self.navigationController];
+    if (![PDRouter globalRouter].navigationController) {
+        [PDRouter globalRouter].navigationController = self.navigationController;
     }
 }
 
@@ -45,31 +44,32 @@
     
     if (indexPath.row == 0) {
         // push
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/push"] routerParams:@{@"title": @"push跳转"}];
+        [[PDRouter globalRouter] openURL:@"PDPage" routerParams:@{@"title": @"push跳转"}];
     } else if (indexPath.row == 1) {
         // present
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/present"] routerParams:nil];
+        [[PDRouter globalRouter] openURL:@"ViewControllerPresent" routerParams:@{@"present": @(1)}];
     } else if (indexPath.row == 2) {
         // dismiss
         [self dismissViewControllerAnimated:YES completion:nil];
     } else if (indexPath.row == 3) {
         // web
-        [[PDRouter defaultRouter] openURL:@"https://www.baidu.com" routerParams:nil];
+        [[PDRouter globalRouter] openURL:@"https://www.baidu.com" routerParams:nil];
     } else if (indexPath.row == 4) {
-        // group/first
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/first"] routerParams:@{@"title": @"first页面", @"测试": @"测试"}];
+        // log
+        [[PDRouter globalRouter] openURL:@"log" routerParams:@{@"arg1": @"value"}];
     } else if (indexPath.row == 5) {
-        // group/second
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/second"] routerParams:@{@"title": @"second页面"}];
+        // withParam
+        [[PDRouter globalRouter] openURL:@"pdog://openpage?title=这是title&key=value" routerParams:@{@"key1": @"value", @"key2": @(2)}];
     } else if (indexPath.row == 6) {
-        // group/third
-        [[PDRouter defaultRouter] openURL:[PDRouterHost stringByAppendingString:@"/group/third?title=third"] routerParams:@{@"testKey": @"testValue值"}];
+        [[PDRouter globalRouter] openURL:@"pdog://firstpage/?key=value&key1=value1" routerParams:@{@"append": @(1)}];
     } else if (indexPath.row == 7) {
-        // pageClass/register
-        PDRouterRegister(PDTestViewController);
+        [[PDRouter globalRouter] openURL:@"pdog://secondpage/path?key=value&key1=value1" routerParams:@{@"append": @(1)}];
     } else if (indexPath.row == 8) {
-        // pageClass/open
-        PDRouterOpen(PDTestViewController, @{@"inputKey": @"inputValue值"});
+        [[PDRouter globalRouter] openURL:@"pdog://testpage?key=value&key1=value1" routerParams:@{@"append": @(1), @"title": @"This is title."}];
+    } else if (indexPath.row == 9) {
+        [[PDRouter globalRouter] openURL:@"pdog://thirdpage/path/?key=value&key1=value1" routerParams:@{@"append": @(1), @"title": @"This is title."}];
+    } else if (indexPath.row == 10) {
+        [[PDRouter globalRouter] openURL:@"PDTestViewController" routerParams:@{@"title": @"test title"}];
     }
 }
 
@@ -80,11 +80,13 @@
                        @"present",
                        @"dismiss",
                        @"web",
-                       @"group/first",
-                       @"group/second",
-                       @"group/third",
-                       @"pageClass/register",
-                       @"pageClass/open"];
+                       @"log",
+                       @"withParam",
+                       @"pdog://firstpage/",
+                       @"pdog://secondpage/path",
+                       @"pdog://testpage",
+                       @"pdog://thirdpage/path/",
+                       @"PDTestViewController"];
     }
     return _dataArray;
 }

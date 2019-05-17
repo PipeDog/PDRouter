@@ -6,43 +6,22 @@
 //  Copyright © 2018年 PipeDog. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "PDRouteCenter.h"
 
-typedef void (^PDRouterEventHandler)(NSDictionary *routerParams);
+NS_ASSUME_NONNULL_BEGIN
 
-/// Router throw events.
-@protocol PDRouterDelegate <NSObject>
-
-@optional
-// Implement this method to handle unregistered urls.
-- (BOOL)tryOpenUnregisteredURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
-- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
-- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
-
-@end
-
-/// Group implement.
-@protocol PDRouterGroup <NSObject>
-
-@property (nonatomic, copy, readonly) NSDictionary<NSString *, PDRouterEventHandler> *listeners;
-
-- (void)on:(NSString *)relativePath eventHandler:(PDRouterEventHandler)eventHandler;
-
-@end
-
-/// Router.
 @interface PDRouter : NSObject
 
-@property (class, strong, readonly) PDRouter *defaultRouter;
+@property (class, strong, readonly) PDRouter *globalRouter;
 
-@property (nonatomic, weak) id<PDRouterDelegate> delegate;
+@property (nonatomic, strong) __kindof UINavigationController *navigationController;
 
-@property (nonatomic, copy) NSString *host;
+- (void)registerClass:(Class)aClass forPattern:(NSString *)pattern;
+- (void)registerEventHandler:(PDRouteCenterEventHandler)eventHandler forPattern:(NSString *)pattern;
 
-- (void)on:(NSString *)fullPath eventHandler:(PDRouterEventHandler)eventHandler;
-
-- (void)onGroup:(NSString *)basePath eventHandler:(void (^)(id<PDRouterGroup> group))eventHandler;
-
-- (BOOL)openURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams;
+- (BOOL)openURL:(NSString *)URLString routerParams:(nullable NSDictionary *)routerParams;
 
 @end
+
+NS_ASSUME_NONNULL_END

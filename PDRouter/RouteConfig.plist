@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   RouteConfig.plist
+   PDRouter
+
+   Created by liang on 2019/5/17.
+   Copyright (c) 2019 PipeDog. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+        <key>pdog://thirdpage/path/</key>
+        <string>PDTestViewController</string>
+        <key>pdog://testpage</key>
+        <string>PDTestViewController</string>
+        <key>pdog://secondpage/path</key>
+        <string>PDPage</string>
+        <key>pdog://firstpage/</key>
+        <string>PDPage</string>
+    </dict>
+</plist>
