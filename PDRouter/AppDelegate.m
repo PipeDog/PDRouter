@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "PDRouterAgent+PDAdd.h"
+#import "PDRouter+PDAdd.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [[PDRouterAgent defaultAgent] registerEvents];
+    [[PDRouter globalRouter] registerEvents];
     return YES;
 }
 

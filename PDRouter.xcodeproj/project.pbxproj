@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD30C5CD228E846F0009CCDA /* PDRouteCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = DD30C5CC228E846F0009CCDA /* PDRouteCenter.m */; };
+		DD30C5D0228E84DD0009CCDA /* UIApplication+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = DD30C5CF228E84DD0009CCDA /* UIApplication+PDAdd.m */; };
+		DD30C5D3228E85240009CCDA /* PDRouter+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = DD30C5D2228E85240009CCDA /* PDRouter+PDAdd.m */; };
+		DD30C5D5228E85D40009CCDA /* RouteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD30C5D4228E85D40009CCDA /* RouteConfig.plist */; };
 		EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291D0204AECFA00C31092 /* AppDelegate.m */; };
 		EC9291D4204AECFA00C31092 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291D3204AECFA00C31092 /* ViewController.m */; };
 		EC9291D7204AECFA00C31092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9291D5204AECFA00C31092 /* Main.storyboard */; };
@@ -18,9 +22,7 @@
 		ECBC026F2100B28500214580 /* PDPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC026E2100B28500214580 /* PDPage.m */; };
 		ECBC02722100BA3300214580 /* PDWebPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02712100BA3300214580 /* PDWebPage.m */; };
 		ECBC02752100BC2600214580 /* PDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02742100BC2600214580 /* PDTestViewController.m */; };
-		ECBC027821059D8E00214580 /* PDRouterAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC027721059D8E00214580 /* PDRouterAgent.m */; };
 		ECBC02C22105C3A400214580 /* PDRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02BE2105C3A400214580 /* PDRouter.m */; };
-		ECBC02C62105D0C600214580 /* PDRouterAgent+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02C52105D0C600214580 /* PDRouterAgent+PDAdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD30C5CB228E846F0009CCDA /* PDRouteCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDRouteCenter.h; sourceTree = "<group>"; };
+		DD30C5CC228E846F0009CCDA /* PDRouteCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouteCenter.m; sourceTree = "<group>"; };
+		DD30C5CE228E84DD0009CCDA /* UIApplication+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+PDAdd.h"; sourceTree = "<group>"; };
+		DD30C5CF228E84DD0009CCDA /* UIApplication+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+PDAdd.m"; sourceTree = "<group>"; };
+		DD30C5D1228E85240009CCDA /* PDRouter+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PDRouter+PDAdd.h"; sourceTree = "<group>"; };
+		DD30C5D2228E85240009CCDA /* PDRouter+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PDRouter+PDAdd.m"; sourceTree = "<group>"; };
+		DD30C5D4228E85D40009CCDA /* RouteConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RouteConfig.plist; sourceTree = "<group>"; };
 		EC9291CC204AECFA00C31092 /* PDRouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDRouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9291CF204AECFA00C31092 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC9291D0204AECFA00C31092 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,12 +72,8 @@
 		ECBC02712100BA3300214580 /* PDWebPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDWebPage.m; sourceTree = "<group>"; };
 		ECBC02732100BC2600214580 /* PDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDTestViewController.h; sourceTree = "<group>"; };
 		ECBC02742100BC2600214580 /* PDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDTestViewController.m; sourceTree = "<group>"; };
-		ECBC027621059D8E00214580 /* PDRouterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDRouterAgent.h; sourceTree = "<group>"; };
-		ECBC027721059D8E00214580 /* PDRouterAgent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouterAgent.m; sourceTree = "<group>"; };
 		ECBC02BE2105C3A400214580 /* PDRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRouter.m; sourceTree = "<group>"; };
 		ECBC02BF2105C3A400214580 /* PDRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRouter.h; sourceTree = "<group>"; };
-		ECBC02C42105D0C600214580 /* PDRouterAgent+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PDRouterAgent+PDAdd.h"; sourceTree = "<group>"; };
-		ECBC02C52105D0C600214580 /* PDRouterAgent+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PDRouterAgent+PDAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,10 +128,9 @@
 				ECBC02C72105E04D00214580 /* Pages */,
 				EC9291CF204AECFA00C31092 /* AppDelegate.h */,
 				EC9291D0204AECFA00C31092 /* AppDelegate.m */,
-				ECBC027621059D8E00214580 /* PDRouterAgent.h */,
-				ECBC027721059D8E00214580 /* PDRouterAgent.m */,
-				ECBC02C42105D0C600214580 /* PDRouterAgent+PDAdd.h */,
-				ECBC02C52105D0C600214580 /* PDRouterAgent+PDAdd.m */,
+				DD30C5D1228E85240009CCDA /* PDRouter+PDAdd.h */,
+				DD30C5D2228E85240009CCDA /* PDRouter+PDAdd.m */,
+				DD30C5D4228E85D40009CCDA /* RouteConfig.plist */,
 				EC9291D5204AECFA00C31092 /* Main.storyboard */,
 				EC9291D8204AECFA00C31092 /* Assets.xcassets */,
 				EC9291DA204AECFA00C31092 /* LaunchScreen.storyboard */,
@@ -159,6 +163,10 @@
 			children = (
 				ECBC02BF2105C3A400214580 /* PDRouter.h */,
 				ECBC02BE2105C3A400214580 /* PDRouter.m */,
+				DD30C5CB228E846F0009CCDA /* PDRouteCenter.h */,
+				DD30C5CC228E846F0009CCDA /* PDRouteCenter.m */,
+				DD30C5CE228E84DD0009CCDA /* UIApplication+PDAdd.h */,
+				DD30C5CF228E84DD0009CCDA /* UIApplication+PDAdd.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -284,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD30C5D5228E85D40009CCDA /* RouteConfig.plist in Resources */,
 				EC9291DC204AECFA00C31092 /* LaunchScreen.storyboard in Resources */,
 				EC9291D9204AECFA00C31092 /* Assets.xcassets in Resources */,
 				EC9291D7204AECFA00C31092 /* Main.storyboard in Resources */,
@@ -311,13 +320,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECBC027821059D8E00214580 /* PDRouterAgent.m in Sources */,
+				DD30C5D0228E84DD0009CCDA /* UIApplication+PDAdd.m in Sources */,
 				EC9291D4204AECFA00C31092 /* ViewController.m in Sources */,
 				ECBC026F2100B28500214580 /* PDPage.m in Sources */,
 				ECBC02722100BA3300214580 /* PDWebPage.m in Sources */,
+				DD30C5D3228E85240009CCDA /* PDRouter+PDAdd.m in Sources */,
+				DD30C5CD228E846F0009CCDA /* PDRouteCenter.m in Sources */,
 				ECBC02C22105C3A400214580 /* PDRouter.m in Sources */,
 				EC9291DF204AECFA00C31092 /* main.m in Sources */,
-				ECBC02C62105D0C600214580 /* PDRouterAgent+PDAdd.m in Sources */,
 				EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */,
 				ECBC02752100BC2600214580 /* PDTestViewController.m in Sources */,
 			);
