@@ -111,13 +111,19 @@
     }
     
     // Valid URL
-    // scheme://host
-    NSString *noQueriesURLString = [NSString stringWithFormat:@"%@://%@", URL.scheme, URL.host];
+    // scheme://host + path
+#define SAFE_STR(__STR__) (__STR__ ?: @"")
+    NSString *noQueriesURLString = [NSString stringWithFormat:@"%@://%@%@",
+                                    SAFE_STR(URL.scheme),
+                                    SAFE_STR(URL.host),
+                                    SAFE_STR(URL.path)];
+#undef SAFE_STR
+    
     void (^eventHandler)(NSDictionary *) = _listeners[noQueriesURLString];
     
     if (!eventHandler) {
-        // scheme://host + path
-        noQueriesURLString = [noQueriesURLString stringByAppendingString:URL.path ?: @""];
+        // scheme://host
+        noQueriesURLString = [noQueriesURLString substringToIndex:(noQueriesURLString.length - URL.path.length)];
         eventHandler = _listeners[noQueriesURLString];
     }
     
