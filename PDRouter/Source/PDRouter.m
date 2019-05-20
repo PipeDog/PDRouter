@@ -11,8 +11,6 @@
 #import "PDPage.h"
 #import <objc/runtime.h>
 
-static NSString *httpScheme = @"http";
-
 static inline BOOL isKindOfClass(Class parent, Class child) {
     for (Class cls = child; cls; cls = class_getSuperclass(cls)) {
         if (cls == parent) {
@@ -133,7 +131,8 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 }
 
 - (BOOL)openWebPage:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    if ([URLString hasPrefix:httpScheme]) {
+    if ([URLString hasPrefix:@"http://"] ||
+        [URLString hasPrefix:@"https://"]) {
         PDWebPage *webPage = [[PDWebPage alloc] init];
         
         NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
