@@ -139,7 +139,6 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
         NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
         [self.navigationController pushViewController:webPage animated:YES];
         
-        URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         NSURL *URL = [NSURL URLWithString:URLString];
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
         [webPage loadRequest:request];
