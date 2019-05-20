@@ -8,7 +8,6 @@
 
 #import "PDRouter.h"
 #import "PDWebPage.h"
-#import "UIApplication+PDAdd.h"
 #import "PDPage.h"
 #import <objc/runtime.h>
 
@@ -94,7 +93,11 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     } else if ([self openWebPage:URLString routerParams:routerParams]) {
         return YES;
     } else if ([[UIApplication sharedApplication] canOpenURL:URL]) {
-        [[UIApplication sharedApplication] openURL:URLString completion:nil];
+        if (@available(iOS 10, *)) {
+            [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
         return YES;
     }
     return NO;
