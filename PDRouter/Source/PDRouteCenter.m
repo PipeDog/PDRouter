@@ -112,13 +112,13 @@
     
     // Valid URL
     // scheme://host
-    NSString *noArgsURLString = [NSString stringWithFormat:@"%@://%@", URL.scheme, URL.host];
-    void (^eventHandler)(NSDictionary *) = _listeners[noArgsURLString];
+    NSString *noQueriesURLString = [NSString stringWithFormat:@"%@://%@", URL.scheme, URL.host];
+    void (^eventHandler)(NSDictionary *) = _listeners[noQueriesURLString];
     
     if (!eventHandler) {
         // scheme://host + path
-        noArgsURLString = [noArgsURLString stringByAppendingString:URL.path ?: @""];
-        eventHandler = _listeners[noArgsURLString];
+        noQueriesURLString = [noQueriesURLString stringByAppendingString:URL.path ?: @""];
+        eventHandler = _listeners[noQueriesURLString];
     }
     
     if (!eventHandler) {
