@@ -70,6 +70,8 @@
         [[PDRouter globalRouter] openURL:@"pdog://thirdpage/path/?key=value&key1=value1" routerParams:@{@"append": @(1), @"title": @"This is title."}];
     } else if (indexPath.row == 10) {
         [[PDRouter globalRouter] openURL:@"PDTestViewController" routerParams:@{@"title": @"test title"}];
+    } else if (indexPath.row == 11) {
+        [[PDRouter globalRouter] openURL:UIApplicationOpenSettingsURLString routerParams:nil];
     }
 }
 
@@ -86,7 +88,8 @@
                        @"pdog://secondpage/path",
                        @"pdog://testpage",
                        @"pdog://thirdpage/path/",
-                       @"PDTestViewController"];
+                       @"PDTestViewController",
+                       UIApplicationOpenSettingsURLString];
     }
     return _dataArray;
 }

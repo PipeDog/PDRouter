@@ -84,11 +84,17 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 
 #pragma mark - PDRouterDelegate Methods
 - (BOOL)tryOpenUnregisteredURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+    if (!URLString.length) { return NO; }
+    
+    URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
     if ([self openNativePage:URLString routerParams:routerParams]) {
         return YES;
     } else if ([self openWebPage:URLString routerParams:routerParams]) {
         return YES;
-    } else if ([self openURLWithSystemMode:URLString routerParams:routerParams]) {
+    } else if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+        [[UIApplication sharedApplication] openURL:URLString completion:nil];
         return YES;
     }
     return NO;
@@ -137,14 +143,6 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
         return YES;
     }
     return NO;
-}
-
-- (BOOL)openURLWithSystemMode:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    __block BOOL result = NO;
-    [[UIApplication sharedApplication] openURL:URLString completion:^(BOOL success) {
-        result = success;
-    }];
-    return result;
 }
 
 @end
