@@ -79,7 +79,7 @@ static PDRouter *__globalRouter;
     if (self) {
         _plugins = [NSMutableArray array];
         _listeners = [NSMutableDictionary dictionary];
-
+        
         [self collectPlugins];
     }
     return self;
@@ -89,13 +89,13 @@ static PDRouter *__globalRouter;
     NSMutableArray<PDRouterPlugin *> *plugins = [NSMutableArray array];
     
     __weak typeof(self) weakSelf = self;
-    [self loadPlugin:^(NSString *classname) {        
+    [self loadPlugin:^(NSString *classname) {
         Class pluginClass = NSClassFromString(classname);
         PDRouterPlugin *plugin = [[pluginClass alloc] init];
         plugin.navigationController = weakSelf.navigationController;
         plugin.router = weakSelf;
         [plugin load];
-
+        
         [plugins addObject:plugin];
     }];
     
@@ -133,9 +133,9 @@ static PDRouter *__globalRouter;
         NSURL *URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
         
         urlString = [NSString stringWithFormat:@"%@://%@%@",
-                   URL.scheme ?: @"",
-                   URL.host ?: @"",
-                   URL.path ?: @""];
+                     URL.scheme ?: @"",
+                     URL.host ?: @"",
+                     URL.path ?: @""];
     }
     
     [_listeners setValue:[eventHandler copy] forKey:urlString];
