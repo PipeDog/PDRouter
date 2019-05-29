@@ -69,7 +69,19 @@ static PDRouter *__globalRouter;
 + (PDRouter *)globalRouter {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __globalRouter = [[self alloc] init];
+        if (!__globalRouter) {
+            __globalRouter = [[self alloc] init];
+        }
+    });
+    return __globalRouter;
+}
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (!__globalRouter) {
+            __globalRouter = [super allocWithZone:zone];
+        }
     });
     return __globalRouter;
 }
