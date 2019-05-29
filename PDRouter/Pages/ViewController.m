@@ -59,7 +59,7 @@
         [[PDRouter globalRouter] openURL:@"log" params:@{@"arg1": @"value"}];
     } else if (indexPath.row == 5) {
         // withParam
-        [[PDRouter globalRouter] openURL:@"pdog://openpage?title=这是title&key=value" params:@{@"key1": @"value", @"key2": @(2)}];
+        [[PDRouter globalRouter] openURL:@"pdog://openpage?title=这是title&key=value&testKey=" params:@{@"key1": @"value", @"key2": @(2)}];
     } else if (indexPath.row == 6) {
         [[PDRouter globalRouter] openURL:@"pdog://firstpage/?key=value&key1=value1" params:@{@"append": @(1)}];
     } else if (indexPath.row == 7) {

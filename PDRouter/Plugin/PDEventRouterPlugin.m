@@ -10,6 +10,14 @@
 
 @implementation PDEventRouterPlugin
 
+- (void)load {
+    [self.router inject:@"log" eventHandler:^(NSDictionary * _Nullable params) {
+        NSLog(@"======================================>");
+        NSLog(@"url = %@, params = %@", @"log", params);
+        NSLog(@"======================================>");
+    }];
+}
+
 - (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
     // TODO: recognize and process
     return NO;

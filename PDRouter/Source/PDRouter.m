@@ -26,8 +26,8 @@
     NSMutableDictionary<NSString *, id> *queryDict = [NSMutableDictionary dictionary];
     
     for (NSURLQueryItem *item in queryItems) {
-        if (!item.name.length || !item.value) continue;
-        [queryDict setObject:item.value forKey:item.name];
+        if (!item.name.length/* || !item.value*/) continue;
+        [queryDict setValue:item.value forKey:item.name];
     }
     return [queryDict copy];
 }
