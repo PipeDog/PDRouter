@@ -86,6 +86,12 @@ static PDRouter *__globalRouter;
     return __globalRouter;
 }
 
+- (void)dealloc {
+    for (PDRouterPlugin *plugin in _plugins) {
+        [plugin unload];
+    }
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -102,6 +108,7 @@ static PDRouter *__globalRouter;
     
     __weak typeof(self) weakSelf = self;
     [self loadPlugin:^(NSString *classname) {
+        
         Class pluginClass = NSClassFromString(classname);
         PDRouterPlugin *plugin = [[pluginClass alloc] init];
         plugin.navigationController = weakSelf.navigationController;

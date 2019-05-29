@@ -11,6 +11,7 @@
 @implementation PDRouterPlugin
 
 - (void)load {}
+- (void)unload {}
 
 - (BOOL)openURL:(NSString *)URLString params:(NSDictionary *)params {
     return NO;
