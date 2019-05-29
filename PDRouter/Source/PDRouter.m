@@ -205,9 +205,6 @@ static PDRouter *__globalRouter;
 
 #pragma mark - Private Methods
 - (BOOL)tryOpenNotRecognizedURL:(NSString *)urlString params:(NSDictionary *)params {
-    if (!urlString.length) {
-        return NO;
-    }
     
     NSString *encodedURLString = [urlString encodeWithURLQueryAllowedCharacterSet];
     

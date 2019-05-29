@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "PDRouter.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <PDRouterDelegate>
 
 @end
 
@@ -17,7 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [PDRouter globalRouter].delegate = self;
     return YES;
+}
+
+- (void)didFinishOpenURL:(NSString *)urlString params:(NSDictionary *)params {
+    NSLog(@"%s, urlString = %@, params = %@", __func__, urlString, params);
+}
+
+- (void)didFailOpenURL:(NSString *)urlString params:(NSDictionary *)params {
+    NSLog(@"%s, urlString = %@, params = %@", __func__, urlString, params);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

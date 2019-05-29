@@ -27,38 +27,6 @@
             endingLineNumber = "59"
             landmarkName = "-reigsterPage:forPattern:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[PDNativeRouterPlugin reigsterPage:forPattern:]"
-                  moduleName = "PDRouter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leiliang/Downloads/PDRouter/PDRouter/Source/Source/PDNativeRouterPlugin.m"
-                  timestampString = "580799609.896275"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[PDNativeRouterPlugin reigsterPage:forPattern:]"
-                  moduleName = "PDRouter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leiliang/Downloads/PDRouter/PDRouter/Source/Source/PDNativeRouterPlugin.m"
-                  timestampString = "580799609.898389"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "104">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -75,38 +43,6 @@
             endingLineNumber = "68"
             landmarkName = "-reigsterPage:forPattern:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[PDNativeRouterPlugin reigsterPage:forPattern:]_block_invoke"
-                  moduleName = "PDRouter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leiliang/Downloads/PDRouter/PDRouter/Source/Source/PDNativeRouterPlugin.m"
-                  timestampString = "580799609.903219"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "120">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[PDNativeRouterPlugin reigsterPage:forPattern:]_block_invoke"
-                  moduleName = "PDRouter"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leiliang/Downloads/PDRouter/PDRouter/Source/Source/PDNativeRouterPlugin.m"
-                  timestampString = "580799609.9050781"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "230">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
