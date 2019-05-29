@@ -12,11 +12,53 @@
 #import <mach-o/getsect.h>
 #import "PDRouterPlugin.h"
 
-@interface PDRouter () <PDRouterCenterDelegate> {
-    NSArray<PDRouterPlugin *> *_plugins;
+@interface NSURL (_PDAdd)
+
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *queryItems;
+
+@end
+
+@implementation NSURL (_PDAdd)
+
+- (NSDictionary <NSString *, NSString *>*)queryItems {
+    NSURLComponents *components = [NSURLComponents componentsWithString:self.absoluteString];
+    NSArray<NSURLQueryItem *> *queryItems = components.queryItems;
+    NSMutableDictionary<NSString *, id> *queryDict = [NSMutableDictionary dictionary];
+    
+    for (NSURLQueryItem *item in queryItems) {
+        if (!item.name.length || !item.value) continue;
+        [queryDict setObject:item.value forKey:item.name];
+    }
+    return [queryDict copy];
 }
 
-@property (nonatomic, strong) PDRouterCenter *routerCenter;
+@end
+
+@interface NSString (_PDAdd)
+
+- (NSString *)encodeWithURLQueryAllowedCharacterSet;
+- (BOOL)isValidURL;
+
+@end
+
+@implementation NSString (_PDAdd)
+
+- (NSString *)encodeWithURLQueryAllowedCharacterSet {
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
+- (BOOL)isValidURL {
+    NSString *regex = @"[a-zA-z]+://[^\\s]*";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [predicate evaluateWithObject:self];
+}
+
+@end
+
+@interface PDRouter () {
+    NSArray<PDRouterPlugin *> *_plugins;
+    NSMutableDictionary<NSString *, PDRouterEventHandler> *_listeners;
+}
 
 @end
 
@@ -36,9 +78,8 @@ static PDRouter *__globalRouter;
     self = [super init];
     if (self) {
         _plugins = [NSMutableArray array];
-        _routerCenter = [PDRouterCenter defaultCenter];
-        _routerCenter.delegate = self;
-        
+        _listeners = [NSMutableDictionary dictionary];
+
         [self collectPlugins];
     }
     return self;
@@ -48,8 +89,7 @@ static PDRouter *__globalRouter;
     NSMutableArray<PDRouterPlugin *> *plugins = [NSMutableArray array];
     
     __weak typeof(self) weakSelf = self;
-    [self loadPlugin:^(NSString *classname) {
-        
+    [self loadPlugin:^(NSString *classname) {        
         Class pluginClass = NSClassFromString(classname);
         PDRouterPlugin *plugin = [[pluginClass alloc] init];
         plugin.navigationController = weakSelf.navigationController;
@@ -85,36 +125,93 @@ static PDRouter *__globalRouter;
 }
 
 #pragma mark - Public Methods
-- (BOOL)openURL:(NSString *)URLString params:(NSDictionary *)params {
-    return [self.routerCenter openURL:URLString params:params];
+- (void)inject:(NSString *)urlString eventHandler:(PDRouterEventHandler)eventHandler {
+    NSAssert(urlString != nil, @"Param urlString can not be nil!");
+    
+    if (urlString.isValidURL) {
+        // Format URL
+        NSURL *URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
+        
+        urlString = [NSString stringWithFormat:@"%@://%@%@",
+                   URL.scheme ?: @"",
+                   URL.host ?: @"",
+                   URL.path ?: @""];
+    }
+    
+    [_listeners setValue:[eventHandler copy] forKey:urlString];
 }
 
-- (void)registerEventHandler:(PDRouterCenterEventHandler)eventHandler forPattern:(NSString *)pattern {
-    [self.routerCenter inject:pattern eventHandler:eventHandler];
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {
+    
+    /** Invalid URL **/
+    if (!urlString.isValidURL) {
+        void (^eventHandler)(NSDictionary *) = _listeners[urlString];
+        
+        if (!eventHandler) { // Match eventHandler failed
+            return [self tryOpenNotRecognizedURL:urlString params:params];
+        }
+        
+        eventHandler(params); // Match eventHandler success
+        
+        if ([self.delegate respondsToSelector:@selector(didFinishOpenURL:params:)]) {
+            [self.delegate didFinishOpenURL:urlString params:params];
+        }
+        return YES;
+    }
+    
+    /** Valid URL **/
+    NSURL *URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
+    
+    // scheme://host + path
+    NSString *noQueriesURLString = [NSString stringWithFormat:@"%@://%@%@",
+                                    URL.scheme ?: @"",
+                                    URL.host ?: @"",
+                                    URL.path ?: @""];
+    
+    void (^eventHandler)(NSDictionary *) = _listeners[noQueriesURLString];
+    
+    if (!eventHandler) {
+        // scheme://host
+        noQueriesURLString = [noQueriesURLString substringToIndex:(noQueriesURLString.length - URL.path.length)];
+        eventHandler = _listeners[noQueriesURLString];
+    }
+    
+    if (!eventHandler) {
+        return [self tryOpenNotRecognizedURL:urlString params:params];
+    }
+    
+    NSMutableDictionary *throwParams = [NSMutableDictionary dictionary];
+    [throwParams addEntriesFromDictionary:params ?: @{}];
+    [throwParams addEntriesFromDictionary:URL.queryItems];
+    eventHandler(throwParams);
+    
+    if ([self.delegate respondsToSelector:@selector(didFinishOpenURL:params:)]) {
+        [self.delegate didFinishOpenURL:urlString params:params];
+    }
+    return YES;
 }
 
-#pragma mark - PDRouterDelegate Methods
-- (BOOL)tryOpenNotRecognizedURL:(NSString *)URLString params:(NSDictionary *)params {
-    if (!URLString.length) { return NO; }
-
-    NSCharacterSet *charSet = [NSCharacterSet URLQueryAllowedCharacterSet];
-    NSString *encodedURLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:charSet];
+#pragma mark - Private Methods
+- (BOOL)tryOpenNotRecognizedURL:(NSString *)urlString params:(NSDictionary *)params {
+    if (!urlString.length) {
+        return NO;
+    }
+    
+    NSString *encodedURLString = [urlString encodeWithURLQueryAllowedCharacterSet];
     
     for (PDRouterPlugin *plugin in _plugins) {
         if ([plugin openURL:encodedURLString params:params]) {
+            if ([self.delegate respondsToSelector:@selector(didFinishOpenURL:params:)]) {
+                [self.delegate didFinishOpenURL:urlString params:params];
+            }
             return YES;
         }
     }
     
+    if ([self.delegate respondsToSelector:@selector(didFailOpenURL:params:)]) {
+        [self.delegate didFailOpenURL:urlString params:params];
+    }
     return NO;
-}
-
-- (void)didFinishOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    NSLog(@"✌️✌️✌️didFinishOpenURL, args = [%@, %@]", URLString, routerParams);
-}
-
-- (void)didFailOpenURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    NSLog(@"❌❌❌didFailOpenURL, args = [%@, %@]", URLString, routerParams);
 }
 
 #pragma mark - Setter Methods

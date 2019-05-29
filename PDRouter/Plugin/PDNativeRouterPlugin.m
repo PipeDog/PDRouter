@@ -2,7 +2,7 @@
 //  PDNativeRouterPlugin.m
 //  PDRouter
 //
-//  Created by 雷亮 on 2019/5/29.
+//  Created by liang on 2019/5/29.
 //  Copyright © 2019 PipeDog. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 
 @implementation PDNativeRouterPlugin
 
-- (void)onload {
+- (void)load {
     [self reigsterPage:NSClassFromString(@"PDPage") forPattern:@"ViewControllerPresent"];
     [self reigsterPage:NSClassFromString(@"PDPage") forPattern:@"pdog://openpage"];
 
@@ -61,17 +61,18 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     }
     
     __weak typeof(self) weakSelf = self;
-    [self.router registerEventHandler:^(NSDictionary * _Nullable routerParams) {
+    [self.router inject:pattern eventHandler:^(NSDictionary * _Nullable params) {
+        
         PDPage *page = [[aClass alloc] init];
-        page.routerParams = routerParams;
+        page.routerParams = params;
         NSAssert(weakSelf.navigationController != nil, @"Property navigationController can not be nil.");
         
-        if ([routerParams[@"present"] integerValue] == 1) {
+        if ([params[@"present"] integerValue] == 1) {
             [weakSelf.navigationController presentViewController:page animated:YES completion:nil];
         } else {
             [weakSelf.navigationController pushViewController:page animated:YES];
         }
-    } forPattern:pattern];
+    }];
 }
 
 @end

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PDRouterCenter.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^PDRouterEventHandler)(NSDictionary * _Nullable params);
 
 typedef struct {
     const char *pluginname;
@@ -17,21 +18,29 @@ typedef struct {
 } PDRouterPluginName;
 
 /* Export plugin */
-#define __PD_EXPORT_PLUGIN_EXT(pluginname, classname) \
+#define __PD_EXPORT_ROUTER_PLUGIN_EXT(pluginname, classname) \
 __attribute__((used, section("__DATA , pd_exp_plugin"))) \
 static const PDRouterPluginName __pd_exp_plugin_##pluginname##__ = {#pluginname, #classname};
 
-#define PD_EXPORT_PLUGIN(classname) __PD_EXPORT_PLUGIN_EXT(classname, classname)
+#define PD_EXPORT_ROUTER_PLUGIN(classname) __PD_EXPORT_ROUTER_PLUGIN_EXT(classname, classname)
+
+@protocol PDRouterDelegate <NSObject>
+
+@optional
+- (void)didFinishOpenURL:(NSString *)urlString params:(NSDictionary * _Nullable)params;
+- (void)didFailOpenURL:(NSString *)urlString params:(NSDictionary * _Nullable)params;
+
+@end
 
 @interface PDRouter : NSObject
 
 @property (class, strong, readonly) PDRouter *globalRouter;
 
 @property (nonatomic, weak) __kindof UINavigationController *navigationController;
+@property (nonatomic, weak) id<PDRouterDelegate> delegate;
 
-- (void)registerEventHandler:(PDRouterCenterEventHandler)eventHandler forPattern:(NSString *)pattern;
-
-- (BOOL)openURL:(NSString *)URLString params:(NSDictionary * _Nullable)params;
+- (void)inject:(NSString *)urlString eventHandler:(PDRouterEventHandler)eventHandler;
+- (BOOL)openURL:(NSString *)urlString params:(nullable NSDictionary *)params;
 
 @end
 

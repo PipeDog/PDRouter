@@ -1,8 +1,8 @@
 //
-//  PDSystemRouterPlugin.h
+//  PDEventRouterPlugin.h
 //  PDRouter
 //
-//  Created by 雷亮 on 2019/5/29.
+//  Created by liang on 2019/5/29.
 //  Copyright © 2019 PipeDog. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-PD_EXPORT_PLUGIN(PDSystemRouterPlugin)
+PD_EXPORT_ROUTER_PLUGIN(PDEventRouterPlugin)
 
-@interface PDSystemRouterPlugin : PDRouterPlugin
+@interface PDEventRouterPlugin : PDRouterPlugin
 
 @end
 
