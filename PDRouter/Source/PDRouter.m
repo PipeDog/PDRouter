@@ -7,29 +7,24 @@
 //
 
 #import "PDRouter.h"
-#import "PDWebPage.h"
-#import "PDPage.h"
 #import <objc/runtime.h>
+#import <dlfcn.h>
+#import <mach-o/getsect.h>
+#import "PDRouterPlugin.h"
 
-static inline BOOL isKindOfClass(Class parent, Class child) {
-    for (Class cls = child; cls; cls = class_getSuperclass(cls)) {
-        if (cls == parent) {
-            return YES;
-        }
-    }
-    return NO;
+@interface PDRouter () <PDRouterCenterDelegate> {
+    NSArray<PDRouterPlugin *> *_plugins;
 }
 
-@interface PDRouter () <PDRouteCenterDelegate>
-
-@property (nonatomic, strong) PDRouteCenter *routeCenter;
+@property (nonatomic, strong) PDRouterCenter *routerCenter;
 
 @end
 
 @implementation PDRouter
 
+static PDRouter *__globalRouter;
+
 + (PDRouter *)globalRouter {
-    static PDRouter *__globalRouter;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         __globalRouter = [[self alloc] init];
@@ -40,64 +35,77 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _routeCenter = [PDRouteCenter defaultCenter];
-        _routeCenter.delegate = self;
+        _plugins = [NSMutableArray array];
+        _routerCenter = [PDRouterCenter defaultCenter];
+        _routerCenter.delegate = self;
+        
+        [self collectPlugins];
     }
     return self;
 }
 
-#pragma mark - Public Methods
-- (BOOL)openURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    return [self.routeCenter openURL:URLString routerParams:routerParams];
-}
-
-- (void)registerClass:(Class)aClass forPattern:(NSString *)pattern {
-    if (!isKindOfClass([PDPage class], aClass)) {
-        NSAssert(NO, @"Param aClass must be subclass of [PDPage class].");
-        return;
-    }
+- (void)collectPlugins {
+    NSMutableArray<PDRouterPlugin *> *plugins = [NSMutableArray array];
     
     __weak typeof(self) weakSelf = self;
-    [self.routeCenter on:pattern eventHandler:^(NSDictionary * _Nonnull routerParams) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
+    [self loadPlugin:^(NSString *classname) {
         
-        if (strongSelf) {
-            PDPage *page = [[aClass alloc] init];
-            page.routerParams = routerParams;
-            NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
-            
-            if ([routerParams[@"present"] integerValue] == 1) {
-                [strongSelf.navigationController presentViewController:page animated:YES completion:nil];
-            } else {
-                [strongSelf.navigationController pushViewController:page animated:YES];
-            }
-        }
+        Class pluginClass = NSClassFromString(classname);
+        PDRouterPlugin *plugin = [[pluginClass alloc] init];
+        plugin.navigationController = weakSelf.navigationController;
+        plugin.router = weakSelf;
+        [plugin load];
+
+        [plugins addObject:plugin];
     }];
+    
+    _plugins = [plugins copy];
 }
 
-- (void)registerEventHandler:(PDRouteCenterEventHandler)eventHandler forPattern:(NSString *)pattern {
-    [self.routeCenter on:pattern eventHandler:eventHandler];
+- (void)loadPlugin:(void (^)(NSString *classname))registerHandler {
+    Dl_info info; dladdr(&__globalRouter, &info);
+    
+#ifdef __LP64__
+    uint64_t addr = 0; const uint64_t mach_header = (uint64_t)info.dli_fbase;
+    const struct section_64 *section = getsectbynamefromheader_64((void *)mach_header, "__DATA", "pd_exp_plugin");
+#else
+    uint32_t addr = 0; const uint32_t mach_header = (uint32_t)info.dli_fbase;
+    const struct section *section = getsectbynamefromheader((void *)mach_header, "__DATA", "pd_exp_plugin");
+#endif
+    
+    if (section == NULL)  return;
+    
+    for (addr = section->offset; addr < section->offset + section->size; addr += sizeof(PDRouterPluginName)) {
+        PDRouterPluginName *plugin = (PDRouterPluginName *)(mach_header + addr);
+        if (!plugin) continue;
+        
+        NSString *classname = [NSString stringWithUTF8String:plugin->classname];
+        !registerHandler ?: registerHandler(classname);
+    }
+}
+
+#pragma mark - Public Methods
+- (BOOL)openURL:(NSString *)URLString params:(NSDictionary *)params {
+    return [self.routerCenter openURL:URLString params:params];
+}
+
+- (void)registerEventHandler:(PDRouterCenterEventHandler)eventHandler forPattern:(NSString *)pattern {
+    [self.routerCenter inject:pattern eventHandler:eventHandler];
 }
 
 #pragma mark - PDRouterDelegate Methods
-- (BOOL)tryOpenUnregisteredURL:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
+- (BOOL)tryOpenNotRecognizedURL:(NSString *)URLString params:(NSDictionary *)params {
     if (!URLString.length) { return NO; }
+
+    NSCharacterSet *charSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+    NSString *encodedURLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:charSet];
     
-    URLString = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSURL *URL = [NSURL URLWithString:URLString];
-    
-    if ([self openNativePage:URLString routerParams:routerParams]) {
-        return YES;
-    } else if ([self openWebPage:URLString routerParams:routerParams]) {
-        return YES;
-    } else if ([[UIApplication sharedApplication] canOpenURL:URL]) {
-        if (@available(iOS 10, *)) {
-            [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:URL];
+    for (PDRouterPlugin *plugin in _plugins) {
+        if ([plugin openURL:encodedURLString params:params]) {
+            return YES;
         }
-        return YES;
     }
+    
     return NO;
 }
 
@@ -109,41 +117,13 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
     NSLog(@"❌❌❌didFailOpenURL, args = [%@, %@]", URLString, routerParams);
 }
 
-#pragma mark - Private Methods
-- (BOOL)openNativePage:(NSString *)pageName routerParams:(NSDictionary *)routerParams {
+#pragma mark - Setter Methods
+- (void)setNavigationController:(__kindof UINavigationController *)navigationController {
+    _navigationController = navigationController;
     
-    Class aClass = NSClassFromString(pageName);
-    if (!aClass) { return NO; }
-    if (!isKindOfClass([PDPage class], aClass)) { return NO; }
-    
-    PDPage *page = [[aClass alloc] init];
-    page.routerParams = routerParams;
-    NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
-    
-    if ([routerParams[@"present"] integerValue] == 1) {
-        [self.navigationController presentViewController:page animated:YES completion:nil];
-    } else {
-        [self.navigationController pushViewController:page animated:YES];
+    for (PDRouterPlugin *plugin in _plugins) {
+        plugin.navigationController = navigationController;
     }
-    
-    [self registerClass:aClass forPattern:pageName];
-    return YES;
-}
-
-- (BOOL)openWebPage:(NSString *)URLString routerParams:(NSDictionary *)routerParams {
-    if ([URLString hasPrefix:@"http://"] ||
-        [URLString hasPrefix:@"https://"]) {
-        PDWebPage *webPage = [[PDWebPage alloc] init];
-        
-        NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
-        [self.navigationController pushViewController:webPage animated:YES];
-        
-        NSURL *URL = [NSURL URLWithString:URLString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        [webPage loadRequest:request];
-        return YES;
-    }
-    return NO;
 }
 
 @end

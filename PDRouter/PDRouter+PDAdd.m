@@ -15,16 +15,16 @@
         NSLog(@"log => %@", routerParams);
     } forPattern:@"log"];
     
-    [self registerClass:NSClassFromString(@"PDPage") forPattern:@"ViewControllerPresent"];
-    [self registerClass:NSClassFromString(@"PDPage") forPattern:@"pdog://openpage"];
+//    [self registerClass:NSClassFromString(@"PDPage") forPattern:@"ViewControllerPresent"];
+//    [self registerClass:NSClassFromString(@"PDPage") forPattern:@"pdog://openpage"];
     
     // Read routes from plist
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RouteConfig" ofType:@"plist"];
-    NSDictionary *routes = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    
-    [routes enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [self registerClass:NSClassFromString(obj) forPattern:key];
-    }];
+//    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RouteConfig" ofType:@"plist"];
+//    NSDictionary *routes = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//    
+//    [routes enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//        [self registerClass:NSClassFromString(obj) forPattern:key];
+//    }];
 }
 
 @end
