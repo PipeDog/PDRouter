@@ -13,7 +13,7 @@
 - (void)load {}
 - (void)unload {}
 
-- (BOOL)openURL:(NSString *)URLString params:(NSDictionary *)params {
+- (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
     return NO;
 }
 
