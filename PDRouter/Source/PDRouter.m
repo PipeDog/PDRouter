@@ -108,7 +108,6 @@ static PDRouter *__globalRouter;
     
     __weak typeof(self) weakSelf = self;
     [self loadPlugin:^(NSString *classname) {
-        
         Class pluginClass = NSClassFromString(classname);
         PDRouterPlugin *plugin = [[pluginClass alloc] init];
         plugin.navigationController = weakSelf.navigationController;
@@ -116,6 +115,10 @@ static PDRouter *__globalRouter;
         [plugin load];
         
         [plugins addObject:plugin];
+    }];
+    
+    [plugins sortUsingComparator:^NSComparisonResult(PDRouterPlugin * _Nonnull obj1, PDRouterPlugin * _Nonnull obj2) {
+        return [obj1 priority] < [obj2 priority];
     }];
     
     _plugins = [plugins copy];

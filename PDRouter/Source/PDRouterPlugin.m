@@ -10,6 +10,10 @@
 
 @implementation PDRouterPlugin
 
+- (PDRouterPluginPriority)priority {
+    return 0;
+}
+
 - (void)load {}
 - (void)unload {}
 
