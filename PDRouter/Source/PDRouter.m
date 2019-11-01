@@ -7,9 +7,6 @@
 //
 
 #import "PDRouter.h"
-#import <objc/runtime.h>
-#import <dlfcn.h>
-#import <mach-o/getsect.h>
 #import "PDRouterPlugin.h"
 
 @interface NSURL (_PDAdd)
