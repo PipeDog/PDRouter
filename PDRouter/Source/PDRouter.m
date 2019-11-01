@@ -56,8 +56,8 @@
 @end
 
 @interface PDRouter () {
-    NSArray<PDRouterPlugin *> *_plugins;
-    NSMutableDictionary<NSString *, PDRouterEventHandler> *_listeners;
+    NSMutableArray<__kindof PDRouterPlugin *> *_plugins;
+    NSMutableDictionary<NSString *, void (^)(NSDictionary * _Nullable)> *_listeners;
 }
 
 @end
@@ -97,57 +97,32 @@ static PDRouter *__globalRouter;
     if (self) {
         _plugins = [NSMutableArray array];
         _listeners = [NSMutableDictionary dictionary];
-        
-        [self collectPlugins];
     }
     return self;
 }
 
-- (void)collectPlugins {
-    NSMutableArray<PDRouterPlugin *> *plugins = [NSMutableArray array];
-    
-    __weak typeof(self) weakSelf = self;
-    [self loadPlugin:^(NSString *classname) {
-        Class pluginClass = NSClassFromString(classname);
-        PDRouterPlugin *plugin = [[pluginClass alloc] init];
-        plugin.navigationController = weakSelf.navigationController;
-        plugin.router = weakSelf;
-        [plugin load];
-        
-        [plugins addObject:plugin];
-    }];
-    
-    [plugins sortUsingComparator:^NSComparisonResult(PDRouterPlugin * _Nonnull obj1, PDRouterPlugin * _Nonnull obj2) {
-        return [obj1 priority] < [obj2 priority];
-    }];
-    
-    _plugins = [plugins copy];
-}
-
-- (void)loadPlugin:(void (^)(NSString *classname))registerHandler {
-    Dl_info info; dladdr(&__globalRouter, &info);
-    
-#ifdef __LP64__
-    uint64_t addr = 0; const uint64_t mach_header = (uint64_t)info.dli_fbase;
-    const struct section_64 *section = getsectbynamefromheader_64((void *)mach_header, "__DATA", "pd_exp_plugin");
-#else
-    uint32_t addr = 0; const uint32_t mach_header = (uint32_t)info.dli_fbase;
-    const struct section *section = getsectbynamefromheader((void *)mach_header, "__DATA", "pd_exp_plugin");
-#endif
-    
-    if (section == NULL)  return;
-    
-    for (addr = section->offset; addr < section->offset + section->size; addr += sizeof(PDRouterPluginName)) {
-        PDRouterPluginName *plugin = (PDRouterPluginName *)(mach_header + addr);
-        if (!plugin) continue;
-        
-        NSString *classname = [NSString stringWithUTF8String:plugin->classname];
-        !registerHandler ?: registerHandler(classname);
+- (void)collectPluginsWithPluginNames:(NSArray<NSString *> *)pluginNames {
+    for (NSString *pluginName in pluginNames) {
+        [self collectPluginWithPluginName:pluginName];
     }
 }
 
+- (void)collectPluginWithPluginName:(NSString *)pluginName {
+    if (!pluginName.length) { return; }
+    
+    Class pluginClass = NSClassFromString(pluginName);
+    if (!pluginClass) { return; }
+    
+    PDRouterPlugin *plugin = [[pluginClass alloc] init];
+    plugin.navigationController = self.navigationController;
+    plugin.router = self;
+    [plugin load];
+
+    [_plugins addObject:plugin];
+}
+
 #pragma mark - Public Methods
-- (void)inject:(NSString *)urlString eventHandler:(PDRouterEventHandler)eventHandler {
+- (void)inject:(NSString *)urlString eventHandler:(void (^)(NSDictionary * _Nullable))eventHandler {
     NSAssert(urlString != nil, @"Param urlString can not be nil!");
     
     if (urlString.isValidURL) {
@@ -163,8 +138,7 @@ static PDRouter *__globalRouter;
     [_listeners setValue:[eventHandler copy] forKey:urlString];
 }
 
-- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {
-    
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {    
     /** Invalid URL **/
     if (!urlString.isValidURL) {
         void (^eventHandler)(NSDictionary *) = _listeners[urlString];

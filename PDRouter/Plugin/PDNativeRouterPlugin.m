@@ -21,10 +21,6 @@ static inline BOOL isKindOfClass(Class parent, Class child) {
 
 @implementation PDNativeRouterPlugin
 
-- (PDRouterPluginPriority)priority {
-    return 1;
-}
-
 - (void)load {
     [self reigsterPage:NSClassFromString(@"PDPage") forPattern:@"ViewControllerPresent"];
     [self reigsterPage:NSClassFromString(@"PDPage") forPattern:@"pdog://openpage"];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD050A88236C36DC00AEB363 /* RouterPlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD050A87236C36DC00AEB363 /* RouterPlugins.plist */; };
 		DD30C5D5228E85D40009CCDA /* RouteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD30C5D4228E85D40009CCDA /* RouteConfig.plist */; };
 		DDA47600229E319500A26950 /* PDRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA475FF229E319500A26950 /* PDRouterPlugin.m */; };
 		DDA47604229E32F000A26950 /* PDWebRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA47603229E32F000A26950 /* PDWebRouterPlugin.m */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD050A87236C36DC00AEB363 /* RouterPlugins.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RouterPlugins.plist; sourceTree = "<group>"; };
 		DD30C5D4228E85D40009CCDA /* RouteConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RouteConfig.plist; sourceTree = "<group>"; };
 		DDA475FE229E319500A26950 /* PDRouterPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDRouterPlugin.h; sourceTree = "<group>"; };
 		DDA475FF229E319500A26950 /* PDRouterPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouterPlugin.m; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				ECBC02C72105E04D00214580 /* Pages */,
 				DDA47601229E319900A26950 /* Plugin */,
 				DD30C5D4228E85D40009CCDA /* RouteConfig.plist */,
+				DD050A87236C36DC00AEB363 /* RouterPlugins.plist */,
 				EC9291D5204AECFA00C31092 /* Main.storyboard */,
 				EC9291D8204AECFA00C31092 /* Assets.xcassets */,
 				EC9291DA204AECFA00C31092 /* LaunchScreen.storyboard */,
@@ -312,6 +315,7 @@
 			files = (
 				DD30C5D5228E85D40009CCDA /* RouteConfig.plist in Resources */,
 				EC9291DC204AECFA00C31092 /* LaunchScreen.storyboard in Resources */,
+				DD050A88236C36DC00AEB363 /* RouterPlugins.plist in Resources */,
 				EC9291D9204AECFA00C31092 /* Assets.xcassets in Resources */,
 				EC9291D7204AECFA00C31092 /* Main.storyboard in Resources */,
 			);

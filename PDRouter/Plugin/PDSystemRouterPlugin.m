@@ -10,10 +10,6 @@
 
 @implementation PDSystemRouterPlugin
 
-- (PDRouterPluginPriority)priority {
-    return -1;
-}
-
 - (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
     NSURL *URL = [NSURL URLWithString:encodedURLString];
 

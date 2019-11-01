@@ -11,14 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NSInteger PDRouterPluginPriority;
-
 @interface PDRouterPlugin : NSObject
 
 @property (nonatomic, weak, nullable) __kindof UINavigationController *navigationController;
 @property (nonatomic, weak) PDRouter *router;
-
-- (PDRouterPluginPriority)priority;
 
 - (void)load;
 - (void)unload;

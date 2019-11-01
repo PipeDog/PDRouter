@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-PD_EXPORT_ROUTER_PLUGIN(PDSystemRouterPlugin)
-
 @interface PDSystemRouterPlugin : PDRouterPlugin
 
 @end
