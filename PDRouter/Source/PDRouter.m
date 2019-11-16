@@ -19,7 +19,11 @@
 
 - (NSDictionary <NSString *, NSString *>*)queryItems {
     NSURLComponents *components = [NSURLComponents componentsWithString:self.absoluteString];
+    if (!components) { return @{}; }
+    
     NSArray<NSURLQueryItem *> *queryItems = components.queryItems;
+    if (!queryItems.count) { return @{}; }
+    
     NSMutableDictionary<NSString *, id> *queryDict = [NSMutableDictionary dictionary];
     
     for (NSURLQueryItem *item in queryItems) {
