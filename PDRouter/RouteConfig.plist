@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>pdog://testpage/info</key>
+	<key>pdog://testpage:8080/info</key>
 	<string>PDTestViewController</string>
 	<key>pdog://thirdpage/path/</key>
 	<string>PDTestViewController</string>

@@ -73,7 +73,7 @@
     } else if (indexPath.row == 11) {
         [[PDRouter globalRouter] openURL:UIApplicationOpenSettingsURLString params:nil];
     } else if (indexPath.row == 12) {
-        [[PDRouter globalRouter] openURL:@"pdog://testpage/info?key=value1&key2=value2" params:nil];
+        [[PDRouter globalRouter] openURL:@"pdog://testpage:8080/info?key=value1&key2=value2" params:nil];
     } else if (indexPath.row == 13) {
         [[PDRouter globalRouter] openURL:@"" params:nil];
     }
@@ -94,7 +94,7 @@
                        @"pdog://thirdpage/path/",
                        @"PDTestViewController",
                        UIApplicationOpenSettingsURLString,
-                       @"pdog://testpage/info",
+                       @"pdog://testpage:8080/info",
                        @"Len == 0"];
     }
     return _dataArray;

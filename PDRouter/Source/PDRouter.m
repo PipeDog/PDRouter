@@ -121,15 +121,10 @@ static PDRouter *__globalRouter;
 #pragma mark - Public Methods
 - (void)inject:(NSString *)urlString eventHandler:(void (^)(NSDictionary * _Nullable))eventHandler {
     NSAssert(urlString != nil, @"Param urlString can not be nil!");
-    
+
     if (urlString.isValidURL) {
-        // Format URL
         NSURL *URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
-        
-        urlString = [NSString stringWithFormat:@"%@://%@%@",
-                     URL.scheme ?: @"",
-                     URL.host ?: @"",
-                     URL.path ?: @""];
+        urlString = [self jointURLStringWithoutQueriesWithURL:URL];
     }
     
     [_listeners setValue:[eventHandler copy] forKey:urlString];
@@ -154,25 +149,15 @@ static PDRouter *__globalRouter;
     
     /** Valid URL **/
     NSURL *URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
-    
-    // scheme://host + path
-    NSString *noQueriesURLString = [NSString stringWithFormat:@"%@://%@%@",
-                                    URL.scheme ?: @"",
-                                    URL.host ?: @"",
-                                    URL.path ?: @""];
+    NSString *noQueriesURLString = [self jointURLStringWithoutQueriesWithURL:URL];
     
     void (^eventHandler)(NSDictionary *) = _listeners[noQueriesURLString];
-    
-    if (!eventHandler) {
-        // scheme://host
-        noQueriesURLString = [noQueriesURLString substringToIndex:(noQueriesURLString.length - URL.path.length)];
-        eventHandler = _listeners[noQueriesURLString];
-    }
-    
-    if (!eventHandler) {
+
+    if (!eventHandler) { // Match eventHandler failed
         return [self tryOpenNotRecognizedURL:urlString params:params];
     }
     
+    // Match eventHandler success
     NSMutableDictionary *throwParams = [NSMutableDictionary dictionary];
     [throwParams addEntriesFromDictionary:params ?: @{}];
     [throwParams addEntriesFromDictionary:URL.queryItems];
@@ -202,6 +187,25 @@ static PDRouter *__globalRouter;
         [self.delegate didFailOpenURL:urlString params:params];
     }
     return NO;
+}
+
+- (NSString *)jointURLStringWithoutQueriesWithURL:(NSURL *)URL {
+    if (!URL || !URL.absoluteString.length) {
+        return @"";
+    }
+    
+    // scheme://host[:port] + path
+    NSMutableString *noQueriesURLString = [NSMutableString string];
+    [noQueriesURLString appendFormat:@"%@", URL.scheme ?: @""];
+    [noQueriesURLString appendString:@"://"];
+    [noQueriesURLString appendFormat:@"%@", URL.host ?: @""];
+
+    if (URL.port) {
+        [noQueriesURLString appendFormat:@":%lu", [URL.port unsignedIntegerValue]];
+    }
+
+    [noQueriesURLString appendFormat:@"%@", URL.path ?: @""];
+    return [noQueriesURLString copy];
 }
 
 #pragma mark - Setter Methods
