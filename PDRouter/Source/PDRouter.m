@@ -102,27 +102,13 @@ static PDRouter *__globalRouter;
     return self;
 }
 
+#pragma mark - Public Methods
 - (void)collectPluginsWithPluginNames:(NSArray<NSString *> *)pluginNames {
     for (NSString *pluginName in pluginNames) {
         [self collectPluginWithPluginName:pluginName];
     }
 }
 
-- (void)collectPluginWithPluginName:(NSString *)pluginName {
-    if (!pluginName.length) { return; }
-    
-    Class pluginClass = NSClassFromString(pluginName);
-    if (!pluginClass) { return; }
-    
-    PDRouterPlugin *plugin = [[pluginClass alloc] init];
-    plugin.navigationController = self.navigationController;
-    plugin.router = self;
-    [plugin load];
-
-    [_plugins addObject:plugin];
-}
-
-#pragma mark - Public Methods
 - (void)inject:(NSString *)urlString eventHandler:(void (^)(NSDictionary * _Nullable))eventHandler {
     NSAssert(urlString != nil, @"Param urlString can not be nil!");
 
@@ -174,6 +160,20 @@ static PDRouter *__globalRouter;
 }
 
 #pragma mark - Private Methods
+- (void)collectPluginWithPluginName:(NSString *)pluginName {
+    if (!pluginName.length) { return; }
+    
+    Class pluginClass = NSClassFromString(pluginName);
+    if (!pluginClass) { return; }
+    
+    PDRouterPlugin *plugin = [[pluginClass alloc] init];
+    plugin.navigationController = self.navigationController;
+    plugin.router = self;
+    [plugin load];
+
+    [_plugins addObject:plugin];
+}
+
 - (BOOL)tryOpenNotRecognizedURL:(NSString *)urlString params:(NSDictionary *)params {
     
     NSString *encodedURLString = [urlString encodeWithURLQueryAllowedCharacterSet];
