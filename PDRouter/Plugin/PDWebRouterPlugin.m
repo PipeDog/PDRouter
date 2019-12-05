@@ -7,29 +7,49 @@
 //
 
 #import "PDWebRouterPlugin.h"
-#import "PDWebPage.h"
+#import "PDWebController.h"
 
 @implementation PDWebRouterPlugin
 
-- (BOOL)isValidURL:(NSString *)URLString {
-    NSString *regex = @"[a-zA-z]+://[^\\s]*";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return [predicate evaluateWithObject:URLString];
+#pragma mark - Override Methods
+- (void)load {
+    // Do nothing...
 }
 
 - (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
     if ([self isValidURL:encodedURLString]) {
-        PDWebPage *webPage = [[PDWebPage alloc] init];
-        
-        NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
-        [self.navigationController pushViewController:webPage animated:YES];
-        
-        NSURL *URL = [NSURL URLWithString:encodedURLString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        [webPage loadRequest:request];
+        [self skipToWebController:encodedURLString params:params];
         return YES;
     }
     return NO;
+}
+
+#pragma mark - Tool Methods
+- (BOOL)isValidURL:(NSString *)URLString {
+    if ([URLString hasPrefix:@"http://"] ||
+        [URLString hasPrefix:@"https://"]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)skipToWebController:(NSString *)URLString params:(NSDictionary *)params {
+    NSAssert(self.navigationController, @"Attr `navigationController` can not be nil!");
+
+    PDWebController *controller = [[PDWebController alloc] init];
+    if ([params[@"mode"] isEqualToString:@"present"]) {
+        UIViewController *topViewController = self.navigationController.topViewController;
+        if (!topViewController) {
+            topViewController = self.navigationController;
+        }
+        [topViewController presentViewController:controller animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    
+    NSURL *URL = [NSURL URLWithString:URLString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    [controller loadRequest:request];
 }
 
 @end

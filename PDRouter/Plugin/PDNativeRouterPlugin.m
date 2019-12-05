@@ -8,71 +8,63 @@
 
 #import "PDNativeRouterPlugin.h"
 #import <objc/runtime.h>
-#import "PDPage.h"
-
-static inline BOOL isKindOfClass(Class parent, Class child) {
-    for (Class cls = child; cls; cls = class_getSuperclass(cls)) {
-        if (cls == parent) {
-            return YES;
-        }
-    }
-    return NO;
-}
+#import "PDViewController.h"
 
 @implementation PDNativeRouterPlugin
 
+#pragma mark - Override Methods
 - (void)load {
-    [self reigsterPage:NSClassFromString(@"PDPage") forPattern:@"ViewControllerPresent"];
-    [self reigsterPage:NSClassFromString(@"PDPage") forPattern:@"pdog://openpage"];
-
-    // Read routes from plist
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RouteConfig" ofType:@"plist"];
     NSDictionary *routes = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     [routes enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [self reigsterPage:NSClassFromString(obj) forPattern:key];
+        [self registerController:NSClassFromString(obj) forPattern:key];
     }];
 }
 
 - (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
-    
     Class aClass = NSClassFromString(encodedURLString);
     if (!aClass) { return NO; }
-    if (!isKindOfClass([PDPage class], aClass)) { return NO; }
     
-    PDPage *page = [[aClass alloc] init];
-    page.routerParams = params;
-    NSAssert(self.navigationController != nil, @"Property navigationController can not be nil.");
-    
-    if ([params[@"present"] integerValue] == 1) {
-        [self.navigationController presentViewController:page animated:YES completion:nil];
-    } else {
-        [self.navigationController pushViewController:page animated:YES];
+    if ([self skipToController:aClass routerParams:params]) {
+        [self registerController:aClass forPattern:encodedURLString];
+        return YES;
     }
-    
-    [self reigsterPage:aClass forPattern:encodedURLString];
-    return YES;
+    return NO;
 }
 
-- (void)reigsterPage:(Class)aClass forPattern:(NSString *)pattern {
-    if (!isKindOfClass([PDPage class], aClass)) {
-        NSAssert(NO, @"Param aClass must be subclass of [PDPage class].");
-        return;
-    }
-    
+#pragma mark - Tool Methods
+- (void)registerController:(Class)aClass forPattern:(NSString *)pattern {
     __weak typeof(self) weakSelf = self;
     [self.router inject:pattern eventHandler:^(NSDictionary * _Nullable params) {
-        
-        PDPage *page = [[aClass alloc] init];
-        page.routerParams = params;
-        NSAssert(weakSelf.navigationController != nil, @"Property navigationController can not be nil.");
-        
-        if ([params[@"present"] integerValue] == 1) {
-            [weakSelf.navigationController presentViewController:page animated:YES completion:nil];
-        } else {
-            [weakSelf.navigationController pushViewController:page animated:YES];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf skipToController:aClass routerParams:params];
         }
     }];
+}
+
+- (BOOL)skipToController:(Class)aClass routerParams:(NSDictionary *)routerParams {
+    if (!aClass) { return NO; }
+    
+    PDViewController *controller = [[aClass alloc] init];
+    if (![controller isKindOfClass:[PDViewController class]]) {
+        return NO;
+    }
+    
+    controller.routerParams = routerParams;
+    NSAssert(self.navigationController, @"Attr `navigationController` can not be nil!");
+    
+    if ([routerParams[@"mode"] isEqualToString:@"present"]) {
+        UIViewController *topViewController = self.navigationController.topViewController;
+        if (!topViewController) {
+            topViewController = self.navigationController;
+        }
+        [topViewController presentViewController:controller animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    return YES;
 }
 
 @end

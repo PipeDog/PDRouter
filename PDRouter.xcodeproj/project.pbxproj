@@ -13,7 +13,6 @@
 		DDA47604229E32F000A26950 /* PDWebRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA47603229E32F000A26950 /* PDWebRouterPlugin.m */; };
 		DDA47607229E32FD00A26950 /* PDNativeRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA47606229E32FD00A26950 /* PDNativeRouterPlugin.m */; };
 		DDA4760A229E331500A26950 /* PDSystemRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA47609229E331500A26950 /* PDSystemRouterPlugin.m */; };
-		DDA4760D229E332500A26950 /* PDEventRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA4760C229E332500A26950 /* PDEventRouterPlugin.m */; };
 		EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291D0204AECFA00C31092 /* AppDelegate.m */; };
 		EC9291D4204AECFA00C31092 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291D3204AECFA00C31092 /* ViewController.m */; };
 		EC9291D7204AECFA00C31092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9291D5204AECFA00C31092 /* Main.storyboard */; };
@@ -22,8 +21,8 @@
 		EC9291DF204AECFA00C31092 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291DE204AECFA00C31092 /* main.m */; };
 		EC9291E9204AECFA00C31092 /* PDRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291E8204AECFA00C31092 /* PDRouterTests.m */; };
 		EC9291F4204AECFA00C31092 /* PDRouterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9291F3204AECFA00C31092 /* PDRouterUITests.m */; };
-		ECBC026F2100B28500214580 /* PDPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC026E2100B28500214580 /* PDPage.m */; };
-		ECBC02722100BA3300214580 /* PDWebPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02712100BA3300214580 /* PDWebPage.m */; };
+		ECBC026F2100B28500214580 /* PDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC026E2100B28500214580 /* PDViewController.m */; };
+		ECBC02722100BA3300214580 /* PDWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02712100BA3300214580 /* PDWebController.m */; };
 		ECBC02752100BC2600214580 /* PDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02742100BC2600214580 /* PDTestViewController.m */; };
 		ECBC02C22105C3A400214580 /* PDRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBC02BE2105C3A400214580 /* PDRouter.m */; };
 /* End PBXBuildFile section */
@@ -56,8 +55,6 @@
 		DDA47606229E32FD00A26950 /* PDNativeRouterPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDNativeRouterPlugin.m; sourceTree = "<group>"; };
 		DDA47608229E331500A26950 /* PDSystemRouterPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDSystemRouterPlugin.h; sourceTree = "<group>"; };
 		DDA47609229E331500A26950 /* PDSystemRouterPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDSystemRouterPlugin.m; sourceTree = "<group>"; };
-		DDA4760B229E332500A26950 /* PDEventRouterPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDEventRouterPlugin.h; sourceTree = "<group>"; };
-		DDA4760C229E332500A26950 /* PDEventRouterPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDEventRouterPlugin.m; sourceTree = "<group>"; };
 		EC9291CC204AECFA00C31092 /* PDRouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDRouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9291CF204AECFA00C31092 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC9291D0204AECFA00C31092 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -74,10 +71,10 @@
 		EC9291EF204AECFA00C31092 /* PDRouterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDRouterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9291F3204AECFA00C31092 /* PDRouterUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouterUITests.m; sourceTree = "<group>"; };
 		EC9291F5204AECFA00C31092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ECBC026D2100B28500214580 /* PDPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDPage.h; sourceTree = "<group>"; };
-		ECBC026E2100B28500214580 /* PDPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDPage.m; sourceTree = "<group>"; };
-		ECBC02702100BA3300214580 /* PDWebPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDWebPage.h; sourceTree = "<group>"; };
-		ECBC02712100BA3300214580 /* PDWebPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDWebPage.m; sourceTree = "<group>"; };
+		ECBC026D2100B28500214580 /* PDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDViewController.h; sourceTree = "<group>"; };
+		ECBC026E2100B28500214580 /* PDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDViewController.m; sourceTree = "<group>"; };
+		ECBC02702100BA3300214580 /* PDWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDWebController.h; sourceTree = "<group>"; };
+		ECBC02712100BA3300214580 /* PDWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDWebController.m; sourceTree = "<group>"; };
 		ECBC02732100BC2600214580 /* PDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDTestViewController.h; sourceTree = "<group>"; };
 		ECBC02742100BC2600214580 /* PDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDTestViewController.m; sourceTree = "<group>"; };
 		ECBC02BE2105C3A400214580 /* PDRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRouter.m; sourceTree = "<group>"; };
@@ -118,8 +115,6 @@
 				DDA47606229E32FD00A26950 /* PDNativeRouterPlugin.m */,
 				DDA47608229E331500A26950 /* PDSystemRouterPlugin.h */,
 				DDA47609229E331500A26950 /* PDSystemRouterPlugin.m */,
-				DDA4760B229E332500A26950 /* PDEventRouterPlugin.h */,
-				DDA4760C229E332500A26950 /* PDEventRouterPlugin.m */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -197,10 +192,10 @@
 			children = (
 				ECBC02732100BC2600214580 /* PDTestViewController.h */,
 				ECBC02742100BC2600214580 /* PDTestViewController.m */,
-				ECBC026D2100B28500214580 /* PDPage.h */,
-				ECBC026E2100B28500214580 /* PDPage.m */,
-				ECBC02702100BA3300214580 /* PDWebPage.h */,
-				ECBC02712100BA3300214580 /* PDWebPage.m */,
+				ECBC026D2100B28500214580 /* PDViewController.h */,
+				ECBC026E2100B28500214580 /* PDViewController.m */,
+				ECBC02702100BA3300214580 /* PDWebController.h */,
+				ECBC02712100BA3300214580 /* PDWebController.m */,
 				EC9291D2204AECFA00C31092 /* ViewController.h */,
 				EC9291D3204AECFA00C31092 /* ViewController.m */,
 			);
@@ -343,16 +338,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC9291D4204AECFA00C31092 /* ViewController.m in Sources */,
-				ECBC026F2100B28500214580 /* PDPage.m in Sources */,
+				ECBC026F2100B28500214580 /* PDViewController.m in Sources */,
 				DDA47604229E32F000A26950 /* PDWebRouterPlugin.m in Sources */,
-				ECBC02722100BA3300214580 /* PDWebPage.m in Sources */,
+				ECBC02722100BA3300214580 /* PDWebController.m in Sources */,
 				DDA47600229E319500A26950 /* PDRouterPlugin.m in Sources */,
 				ECBC02C22105C3A400214580 /* PDRouter.m in Sources */,
 				DDA47607229E32FD00A26950 /* PDNativeRouterPlugin.m in Sources */,
 				EC9291DF204AECFA00C31092 /* main.m in Sources */,
 				EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */,
 				ECBC02752100BC2600214580 /* PDTestViewController.m in Sources */,
-				DDA4760D229E332500A26950 /* PDEventRouterPlugin.m in Sources */,
 				DDA4760A229E331500A26950 /* PDSystemRouterPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

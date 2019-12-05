@@ -1,21 +1,21 @@
 //
-//  PDWebPage.m
+//  PDWebController.m
 //  PDRouter
 //
 //  Created by liang on 2018/7/19.
 //  Copyright © 2018年 PipeDog. All rights reserved.
 //
 
-#import "PDWebPage.h"
+#import "PDWebController.h"
 
-@interface PDWebPage () <UIWebViewDelegate>
+@interface PDWebController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *progressView;
 
 @end
 
-@implementation PDWebPage
+@implementation PDWebController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -1,18 +1,18 @@
 //
-//  PDPage.m
+//  PDViewController.m
 //  PDRouter
 //
 //  Created by liang on 2018/7/19.
 //  Copyright © 2018年 PipeDog. All rights reserved.
 //
 
-#import "PDPage.h"
+#import "PDViewController.h"
 
-@interface PDPage ()
+@interface PDViewController ()
 
 @end
 
-@implementation PDPage
+@implementation PDViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

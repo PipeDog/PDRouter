@@ -9,8 +9,8 @@
 	<key>pdog://testpage</key>
 	<string>PDTestViewController</string>
 	<key>pdog://secondpage/path</key>
-	<string>PDPage</string>
+	<string>PDViewController</string>
 	<key>pdog://firstpage/</key>
-	<string>PDPage</string>
+	<string>PDViewController</string>
 </dict>
 </plist>

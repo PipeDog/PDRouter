@@ -1,5 +1,5 @@
 //
-//  PDWebPage.h
+//  PDViewController.h
 //  PDRouter
 //
 //  Created by liang on 2018/7/19.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PDWebPage : UIViewController
+@interface PDViewController : UIViewController
 
-- (void)loadRequest:(NSURLRequest *)request;
+@property (nonatomic, strong) NSDictionary *routerParams;
 
 @end

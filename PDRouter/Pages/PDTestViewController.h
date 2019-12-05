@@ -6,8 +6,8 @@
 //  Copyright © 2018年 PipeDog. All rights reserved.
 //
 
-#import "PDPage.h"
+#import "PDViewController.h"
 
-@interface PDTestViewController : PDPage
+@interface PDTestViewController : PDViewController
 
 @end

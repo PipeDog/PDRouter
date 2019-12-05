@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "PDRouter.h"
-#import "PDPage.h"
+#import "PDViewController.h"
 #import "PDTestViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -44,10 +44,10 @@
     
     if (indexPath.row == 0) {
         // push
-        [[PDRouter globalRouter] openURL:@"PDPage" params:@{@"title": @"push跳转"}];
+        [[PDRouter globalRouter] openURL:@"PDViewController" params:@{@"title": @"from last vc."}];
     } else if (indexPath.row == 1) {
         // present
-        [[PDRouter globalRouter] openURL:@"ViewControllerPresent" params:@{@"present": @(1)}];
+        [[PDRouter globalRouter] openURL:@"PDViewController" params:@{@"mode": @"present"}];
     } else if (indexPath.row == 2) {
         // dismiss
         [self dismissViewControllerAnimated:YES completion:nil];
