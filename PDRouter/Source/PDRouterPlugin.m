@@ -10,8 +10,9 @@
 
 @implementation PDRouterPlugin
 
-- (void)load {}
-- (void)unload {}
+- (void)load {
+    // Override this method...
+}
 
 - (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
     return NO;

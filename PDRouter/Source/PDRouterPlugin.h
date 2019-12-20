@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) PDRouter *router;
 
 - (void)load;
-- (void)unload;
 
 - (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary * _Nullable)params;
 

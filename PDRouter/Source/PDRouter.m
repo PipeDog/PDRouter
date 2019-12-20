@@ -87,12 +87,6 @@ static PDRouter *__globalRouter;
     return __globalRouter;
 }
 
-- (void)dealloc {
-    for (PDRouterPlugin *plugin in _plugins) {
-        [plugin unload];
-    }
-}
-
 - (instancetype)init {
     self = [super init];
     if (self) {
