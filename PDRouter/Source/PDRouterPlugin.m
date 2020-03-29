@@ -14,7 +14,7 @@
     // Override this method...
 }
 
-- (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {
     return NO;
 }
 

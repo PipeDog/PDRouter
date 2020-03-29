@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)load;
 
-- (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary * _Nullable)params;
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary * _Nullable)params;
 
 @end
 

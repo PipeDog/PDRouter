@@ -170,10 +170,8 @@ static PDRouter *__globalRouter;
 
 - (BOOL)tryOpenNotRecognizedURL:(NSString *)urlString params:(NSDictionary *)params {
     
-    NSString *encodedURLString = [urlString encodeWithURLQueryAllowedCharacterSet];
-    
     for (PDRouterPlugin *plugin in _plugins) {
-        if ([plugin openURL:encodedURLString params:params]) {
+        if ([plugin openURL:urlString params:params]) {
             if ([self.delegate respondsToSelector:@selector(didFinishOpenURL:params:)]) {
                 [self.delegate didFinishOpenURL:urlString params:params];
             }

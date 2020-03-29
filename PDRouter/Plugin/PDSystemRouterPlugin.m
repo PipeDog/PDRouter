@@ -7,6 +7,7 @@
 //
 
 #import "PDSystemRouterPlugin.h"
+#import "NSString+PDAdd.h"
 
 @implementation PDSystemRouterPlugin
 
@@ -15,7 +16,9 @@
     // Do nothing...
 }
 
-- (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {
+    NSString *encodedURLString = [urlString pd_encodeWithURLQueryAllowedCharacterSet];
+
     NSURL *URL = [NSURL URLWithString:encodedURLString];
     if ([self canOpenURL:URL]) {
         [self openURL:URL];

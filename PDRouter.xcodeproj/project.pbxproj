@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD050A88236C36DC00AEB363 /* RouterPlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD050A87236C36DC00AEB363 /* RouterPlugins.plist */; };
 		DD30C5D5228E85D40009CCDA /* RouteConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD30C5D4228E85D40009CCDA /* RouteConfig.plist */; };
+		DD6A1B5E2430ED0E00093D51 /* NSString+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6A1B5D2430ED0E00093D51 /* NSString+PDAdd.m */; };
 		DDA47600229E319500A26950 /* PDRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA475FF229E319500A26950 /* PDRouterPlugin.m */; };
 		DDA47604229E32F000A26950 /* PDWebRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA47603229E32F000A26950 /* PDWebRouterPlugin.m */; };
 		DDA47607229E32FD00A26950 /* PDNativeRouterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA47606229E32FD00A26950 /* PDNativeRouterPlugin.m */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		DD050A87236C36DC00AEB363 /* RouterPlugins.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RouterPlugins.plist; sourceTree = "<group>"; };
 		DD30C5D4228E85D40009CCDA /* RouteConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RouteConfig.plist; sourceTree = "<group>"; };
+		DD6A1B5C2430ED0E00093D51 /* NSString+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+PDAdd.h"; sourceTree = "<group>"; };
+		DD6A1B5D2430ED0E00093D51 /* NSString+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDAdd.m"; sourceTree = "<group>"; };
 		DDA475FE229E319500A26950 /* PDRouterPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDRouterPlugin.h; sourceTree = "<group>"; };
 		DDA475FF229E319500A26950 /* PDRouterPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDRouterPlugin.m; sourceTree = "<group>"; };
 		DDA47602229E32F000A26950 /* PDWebRouterPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDWebRouterPlugin.h; sourceTree = "<group>"; };
@@ -109,6 +112,8 @@
 		DDA47601229E319900A26950 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
+				DD6A1B5C2430ED0E00093D51 /* NSString+PDAdd.h */,
+				DD6A1B5D2430ED0E00093D51 /* NSString+PDAdd.m */,
 				DDA47602229E32F000A26950 /* PDWebRouterPlugin.h */,
 				DDA47603229E32F000A26950 /* PDWebRouterPlugin.m */,
 				DDA47605229E32FD00A26950 /* PDNativeRouterPlugin.h */,
@@ -348,6 +353,7 @@
 				EC9291D1204AECFA00C31092 /* AppDelegate.m in Sources */,
 				ECBC02752100BC2600214580 /* PDTestViewController.m in Sources */,
 				DDA4760A229E331500A26950 /* PDSystemRouterPlugin.m in Sources */,
+				DD6A1B5E2430ED0E00093D51 /* NSString+PDAdd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "PDNativeRouterPlugin.h"
 #import <objc/runtime.h>
 #import "PDViewController.h"
+#import "NSString+PDAdd.h"
 
 @implementation PDNativeRouterPlugin
 
@@ -22,7 +23,9 @@
     }];
 }
 
-- (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {
+    NSString *encodedURLString = [urlString pd_encodeWithURLQueryAllowedCharacterSet];
+
     Class aClass = NSClassFromString(encodedURLString);
     if (!aClass) { return NO; }
     

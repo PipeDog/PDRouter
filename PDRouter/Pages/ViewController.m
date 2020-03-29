@@ -67,7 +67,7 @@
     } else if (indexPath.row == 8) {
         [[PDRouter globalRouter] openURL:@"pdog://testpage?key=value&key1=value1" params:@{@"append": @(1), @"title": @"This is title."}];
     } else if (indexPath.row == 9) {
-        [[PDRouter globalRouter] openURL:@"pdog://thirdpage/path/?key=value&key1=value1" params:@{@"append": @(1), @"title": @"This is title."}];
+        [[PDRouter globalRouter] openURL:@"pdog://thirdpage/path/?key=测试&key1=测试2" params:@{@"append": @(1), @"title": @"This is title."}];
     } else if (indexPath.row == 10) {
         [[PDRouter globalRouter] openURL:@"PDTestViewController" params:@{@"title": @"test title"}];
     } else if (indexPath.row == 11) {

@@ -8,6 +8,7 @@
 
 #import "PDWebRouterPlugin.h"
 #import "PDWebController.h"
+#import "NSString+PDAdd.h"
 
 @implementation PDWebRouterPlugin
 
@@ -16,7 +17,9 @@
     // Do nothing...
 }
 
-- (BOOL)openURL:(NSString *)encodedURLString params:(NSDictionary *)params {
+- (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {
+    NSString *encodedURLString = [urlString pd_encodeWithURLQueryAllowedCharacterSet];
+    
     if ([self isValidURL:encodedURLString]) {
         [self skipToWebController:encodedURLString params:params];
         return YES;
