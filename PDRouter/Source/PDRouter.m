@@ -132,9 +132,12 @@ static PDRouter *__globalRouter;
     }
     
     /** Valid URL **/
-    NSURL *URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    if (!URL) {
+        URL = [NSURL URLWithString:[urlString encodeWithURLQueryAllowedCharacterSet]];
+    }
+
     NSString *noQueriesURLString = [self jointURLStringWithoutQueriesWithURL:URL];
-    
     void (^eventHandler)(NSDictionary *) = _listeners[noQueriesURLString];
 
     if (!eventHandler) { // Match eventHandler failed
