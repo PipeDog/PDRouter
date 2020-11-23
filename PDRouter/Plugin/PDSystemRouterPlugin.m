@@ -14,6 +14,7 @@
 #pragma mark - Override Methods
 - (void)load {
     // Do nothing...
+    NSLog(@"name = %@", self.name);
 }
 
 - (BOOL)openURL:(NSString *)urlString params:(NSDictionary *)params {

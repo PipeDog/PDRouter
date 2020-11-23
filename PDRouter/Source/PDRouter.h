@@ -25,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) __kindof UINavigationController *navigationController;
 @property (nonatomic, weak) id<PDRouterDelegate> delegate;
 
-- (void)collectPluginsWithPluginNames:(NSArray<NSString *> *)pluginNames;
-
 - (void)inject:(NSString *)urlString eventHandler:(void (^)(NSDictionary * _Nullable params))eventHandler;
 - (BOOL)openURL:(NSString *)urlString params:(NSDictionary * _Nullable)params;
 

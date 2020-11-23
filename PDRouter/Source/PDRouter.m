@@ -7,6 +7,9 @@
 //
 
 #import "PDRouter.h"
+#import <objc/runtime.h>
+#import <dlfcn.h>
+#import <mach-o/getsect.h>
 #import "PDRouterPlugin.h"
 
 @interface NSURL (_PDAdd)
@@ -92,17 +95,57 @@ static PDRouter *__globalRouter;
     if (self) {
         _plugins = [NSMutableArray array];
         _listeners = [NSMutableDictionary dictionary];
+        
+        [self collectPlugins];
     }
     return self;
 }
 
-#pragma mark - Public Methods
-- (void)collectPluginsWithPluginNames:(NSArray<NSString *> *)pluginNames {
-    for (NSString *pluginName in pluginNames) {
-        [self collectPluginWithPluginName:pluginName];
+- (void)collectPlugins {
+    NSMutableArray<PDRouterPlugin *> *plugins = [NSMutableArray array];
+    
+    __weak typeof(self) weakSelf = self;
+    [self loadPluginWithRegisterHandler:^(NSString *pluginname, NSString *classname) {
+        Class pluginClass = NSClassFromString(classname);
+        PDRouterPlugin *plugin = [[pluginClass alloc] init];
+        plugin.name = pluginname;
+        plugin.router = weakSelf;
+        [plugin load];
+        
+        [plugins addObject:plugin];
+    }];
+    
+    [plugins sortUsingComparator:^NSComparisonResult(PDRouterPlugin * _Nonnull obj1, PDRouterPlugin * _Nonnull obj2) {
+        return [obj1 priority] < [obj2 priority];
+    }];
+    
+    _plugins = [plugins copy];
+}
+
+- (void)loadPluginWithRegisterHandler:(void (^)(NSString *pluginname, NSString *classname))registerHandler {
+    Dl_info info; dladdr(&__globalRouter, &info);
+    
+#ifdef __LP64__
+    uint64_t addr = 0; const uint64_t mach_header = (uint64_t)info.dli_fbase;
+    const struct section_64 *section = getsectbynamefromheader_64((void *)mach_header, "__DATA", "pd_exp_plugin");
+#else
+    uint32_t addr = 0; const uint32_t mach_header = (uint32_t)info.dli_fbase;
+    const struct section *section = getsectbynamefromheader((void *)mach_header, "__DATA", "pd_exp_plugin");
+#endif
+    
+    if (section == NULL) { return; }
+    
+    for (addr = section->offset; addr < section->offset + section->size; addr += sizeof(PDRouterPluginName)) {
+        PDRouterPluginName *plugin = (PDRouterPluginName *)(mach_header + addr);
+        if (!plugin) { continue; }
+        
+        NSString *pluginname = [NSString stringWithUTF8String:plugin->pluginname];
+        NSString *classname = [NSString stringWithUTF8String:plugin->classname];
+        !registerHandler ?: registerHandler(pluginname, classname);
     }
 }
 
+#pragma mark - Public Methods
 - (void)inject:(NSString *)urlString eventHandler:(void (^)(NSDictionary * _Nullable))eventHandler {
     NSAssert(urlString != nil, @"Param urlString can not be nil!");
 
@@ -157,22 +200,11 @@ static PDRouter *__globalRouter;
 }
 
 #pragma mark - Private Methods
-- (void)collectPluginWithPluginName:(NSString *)pluginName {
-    if (!pluginName.length) { return; }
-    
-    Class pluginClass = NSClassFromString(pluginName);
-    if (!pluginClass) { return; }
-    
-    PDRouterPlugin *plugin = [[pluginClass alloc] init];
-    plugin.navigationController = self.navigationController;
-    plugin.router = self;
-    [plugin load];
-
-    [_plugins addObject:plugin];
-}
-
 - (BOOL)tryOpenNotRecognizedURL:(NSString *)urlString params:(NSDictionary *)params {
-    
+    if (!urlString.length) {
+        return NO;
+    }
+
     for (PDRouterPlugin *plugin in _plugins) {
         if ([plugin openURL:urlString params:params]) {
             if ([self.delegate respondsToSelector:@selector(didFinishOpenURL:params:)]) {
@@ -200,7 +232,7 @@ static PDRouter *__globalRouter;
     [noQueriesURLString appendFormat:@"%@", URL.host ?: @""];
 
     if (URL.port) {
-        [noQueriesURLString appendFormat:@":%lu", [URL.port unsignedIntegerValue]];
+        [noQueriesURLString appendFormat:@":%lu", (unsigned long)[URL.port unsignedIntegerValue]];
     }
 
     [noQueriesURLString appendFormat:@"%@", URL.path ?: @""];

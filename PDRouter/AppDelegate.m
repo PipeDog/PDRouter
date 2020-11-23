@@ -19,21 +19,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RouterPlugins" ofType:@"plist"];
+//    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RouterPlugins" ofType:@"plist"];
+//
+//    NSArray *(^collectPluginNames)(void) = ^{
+//        if (@available(iOS 11.0, *)) {
+//            NSURL *URL = [NSURL fileURLWithPath:plistPath];
+//            return [NSArray arrayWithContentsOfURL:URL error:nil];
+//        } else {
+//            // Fallback on earlier versions
+//            return [NSArray arrayWithContentsOfFile:plistPath];
+//        }
+//    };
+//
+//    NSArray *pluginNames = collectPluginNames();
     
-    NSArray *(^collectPluginNames)(void) = ^{
-        if (@available(iOS 11.0, *)) {
-            NSURL *URL = [NSURL fileURLWithPath:plistPath];
-            return [NSArray arrayWithContentsOfURL:URL error:nil];
-        } else {
-            // Fallback on earlier versions
-            return [NSArray arrayWithContentsOfFile:plistPath];
-        }
-    };
-    
-    NSArray *pluginNames = collectPluginNames();
-    
-    [[PDRouter globalRouter] collectPluginsWithPluginNames:pluginNames];
+//    [[PDRouter globalRouter] collectPluginsWithPluginNames:pluginNames];
     [PDRouter globalRouter].delegate = self;
     return YES;
 }

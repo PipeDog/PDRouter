@@ -15,6 +15,8 @@
 
 #pragma mark - Override Methods
 - (void)load {
+    NSLog(@"name = %@", self.name);
+
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"RouteConfig" ofType:@"plist"];
     NSDictionary *routes = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
