@@ -28,15 +28,10 @@
 
     // 如果视图控制器遵循了 `PDRouterAutoParamReceiver` 协议，自动解析参数并赋值
     else if ([page conformsToProtocol:@protocol(PDRouterAutoParamReceiver)]) {
-        [[PDObjectPropertyMapper defaultMapper] mapKeyValuePairs:chain.request.parameters
-                                                        toObject:page
-                                                     mapperBlock:^PDObjectCustomPropertyMapper _Nullable{
-            if (![page respondsToSelector:@selector(routerCustomPropertyMapper)]) {
-                return nil;
-            }
-            
-            return [(id<PDRouterAutoParamReceiver>) page routerCustomPropertyMapper];
-        }];
+        PDObjectSetPropertyValues(page, chain.request.parameters, ^PDObjectCustomPropertyMapper _Nullable{
+            return ([page respondsToSelector:@selector(routerCustomPropertyMapper)] ?
+                    [(id<PDRouterAutoParamReceiver>) page routerCustomPropertyMapper] : nil);
+        });
     }
 
     // 不接收参数

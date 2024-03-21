@@ -9,14 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- 为指定对象设置属性值
- 
- @param object 需要设置属性的对象
- @param keyValuePairs 键值对字典，键为对象的属性名称，值为对应的属性值
- */
-FOUNDATION_EXPORT void PDObjectSetPropertyValues(id object, NSDictionary<NSString *, id> *keyValuePairs);
-
 typedef NSString * PDObjectParameterKey;    ///< 参数中的键名称
 typedef NSString * PDObjectPropertyName;    ///< 对象属性名称
 
@@ -95,5 +87,16 @@ typedef PDObjectCustomPropertyMapper _Nullable (^PDObjectPropertyMapperBlock)(vo
             mapperBlock:(nullable PDObjectPropertyMapperBlock)block;
 
 @end
+
+/**
+ 为指定对象设置属性值
+ 
+ @param object 需要设置属性的对象
+ @param keyValuePairs 键值对字典，键为对象的属性名称，值为对应的属性值
+ @param mapperBlock 一个返回自定义属性映射表的 block，映射表的键为数据源中的键名称，值为对象中对应的属性名称
+ */
+FOUNDATION_EXPORT void PDObjectSetPropertyValues(id object,
+                                                 NSDictionary<NSString *, id> *keyValuePairs,
+                                                 PDObjectPropertyMapperBlock _Nullable mapperBlock);
 
 NS_ASSUME_NONNULL_END

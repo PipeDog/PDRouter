@@ -223,6 +223,10 @@ static inline void PDObjectSetNumberToProperty(__unsafe_unretained id model,
 
 @end
 
-void PDObjectSetPropertyValues(id object, NSDictionary<NSString *, id> *keyValuePairs) {
-    [[PDObjectPropertyMapper defaultMapper] mapKeyValuePairs:keyValuePairs toObject:object];
+void PDObjectSetPropertyValues(id object,
+                               NSDictionary<NSString *, id> *keyValuePairs,
+                               PDObjectPropertyMapperBlock _Nullable mapperBlock) {
+    [[PDObjectPropertyMapper defaultMapper] mapKeyValuePairs:keyValuePairs
+                                                    toObject:object
+                                                 mapperBlock:mapperBlock];
 }
