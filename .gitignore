@@ -19,6 +19,8 @@ DerivedData
 
 # CocoaPods
 Pods/
+Example/Pods
+*.lock
 
 # Carthage
 Carthage/Build
