@@ -1,0 +1,16 @@
+PODS:
+  - PDRouter (0.1.0)
+
+DEPENDENCIES:
+  - PDRouter (from `../`)
+
+EXTERNAL SOURCES:
+  PDRouter:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PDRouter: 5ba8dfc95aeeef68a7f4d881570b0e5c0b6a2c40
+
+PODFILE CHECKSUM: d2c54b7756fdbcbb9345abe019e29ee9c9ae8b91
+
+COCOAPODS: 1.12.1

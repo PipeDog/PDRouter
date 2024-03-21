@@ -24,6 +24,9 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		940E7ABBF684C80AAE988624 /* Pods_PDRouter_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500A5887DE1E68C0341A2BC7 /* Pods_PDRouter_Tests.framework */; };
+		DDCAB3ED2BAC19DF009179A9 /* PDAutoParamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCAB3EC2BAC19DF009179A9 /* PDAutoParamViewController.m */; };
+		DDCAB3F02BAC1A0B009179A9 /* PDManualParamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCAB3EF2BAC1A0B009179A9 /* PDManualParamViewController.m */; };
+		DDCAB3F62BAC1C67009179A9 /* PDLogInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = DDCAB3F52BAC1C67009179A9 /* PDLogInterceptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +41,8 @@
 
 /* Begin PBXFileReference section */
 		0F466BCD8D081BDB3FCC3E91 /* Pods-PDRouter_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDRouter_Example.debug.xcconfig"; path = "Target Support Files/Pods-PDRouter_Example/Pods-PDRouter_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		1096EF272288E631819FCECE /* PDRouter.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = PDRouter.podspec; path = ../PDRouter.podspec; sourceTree = "<group>"; };
-		4097EFA1AC5E58CCB47D22D6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		1096EF272288E631819FCECE /* PDRouter.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PDRouter.podspec; path = ../PDRouter.podspec; sourceTree = "<group>"; };
+		4097EFA1AC5E58CCB47D22D6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		500A5887DE1E68C0341A2BC7 /* Pods_PDRouter_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PDRouter_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* PDRouter_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDRouter_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,8 +68,14 @@
 		8FDC0C25422804BF52169CC3 /* Pods-PDRouter_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDRouter_Example.release.xcconfig"; path = "Target Support Files/Pods-PDRouter_Example/Pods-PDRouter_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BDE66E40BA008D59DED92A20 /* Pods_PDRouter_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PDRouter_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D446F7D54CB06621122AEB4B /* Pods-PDRouter_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDRouter_Tests.debug.xcconfig"; path = "Target Support Files/Pods-PDRouter_Tests/Pods-PDRouter_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		DDCAB3EB2BAC19DF009179A9 /* PDAutoParamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDAutoParamViewController.h; sourceTree = "<group>"; };
+		DDCAB3EC2BAC19DF009179A9 /* PDAutoParamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDAutoParamViewController.m; sourceTree = "<group>"; };
+		DDCAB3EE2BAC1A0B009179A9 /* PDManualParamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDManualParamViewController.h; sourceTree = "<group>"; };
+		DDCAB3EF2BAC1A0B009179A9 /* PDManualParamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDManualParamViewController.m; sourceTree = "<group>"; };
+		DDCAB3F42BAC1C67009179A9 /* PDLogInterceptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDLogInterceptor.h; sourceTree = "<group>"; };
+		DDCAB3F52BAC1C67009179A9 /* PDLogInterceptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDLogInterceptor.m; sourceTree = "<group>"; };
 		E399149EBFD3D5CAB15272C5 /* Pods-PDRouter_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDRouter_Tests.release.xcconfig"; path = "Target Support Files/Pods-PDRouter_Tests/Pods-PDRouter_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		EE058F99F5D8B3C76EC6CD31 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		EE058F99F5D8B3C76EC6CD31 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +141,8 @@
 		6003F593195388D20070C39A /* Example for PDRouter */ = {
 			isa = PBXGroup;
 			children = (
+				DDCAB3F72BAC1C6A009179A9 /* Interceptors */,
+				DDCAB3F22BAC1C3D009179A9 /* Pages */,
 				6003F59C195388D20070C39A /* PDAppDelegate.h */,
 				6003F59D195388D20070C39A /* PDAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -185,6 +196,26 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		DDCAB3F22BAC1C3D009179A9 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				DDCAB3EB2BAC19DF009179A9 /* PDAutoParamViewController.h */,
+				DDCAB3EC2BAC19DF009179A9 /* PDAutoParamViewController.m */,
+				DDCAB3EE2BAC1A0B009179A9 /* PDManualParamViewController.h */,
+				DDCAB3EF2BAC1A0B009179A9 /* PDManualParamViewController.m */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		DDCAB3F72BAC1C6A009179A9 /* Interceptors */ = {
+			isa = PBXGroup;
+			children = (
+				DDCAB3F42BAC1C67009179A9 /* PDLogInterceptor.h */,
+				DDCAB3F52BAC1C67009179A9 /* PDLogInterceptor.m */,
+			);
+			path = Interceptors;
+			sourceTree = "<group>";
+		};
 		F9FA6D94187F2004C045D703 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +224,6 @@
 				D446F7D54CB06621122AEB4B /* Pods-PDRouter_Tests.debug.xcconfig */,
 				E399149EBFD3D5CAB15272C5 /* Pods-PDRouter_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -248,6 +278,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = liang;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = N5ZNVTYNY8;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -258,6 +291,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -367,6 +401,9 @@
 				6003F59E195388D20070C39A /* PDAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* PDViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				DDCAB3ED2BAC19DF009179A9 /* PDAutoParamViewController.m in Sources */,
+				DDCAB3F62BAC1C67009179A9 /* PDLogInterceptor.m in Sources */,
+				DDCAB3F02BAC1A0B009179A9 /* PDManualParamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +531,7 @@
 			baseConfigurationReference = 0F466BCD8D081BDB3FCC3E91 /* Pods-PDRouter_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N5ZNVTYNY8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PDRouter/PDRouter-Prefix.pch";
 				INFOPLIST_FILE = "PDRouter/PDRouter-Info.plist";
@@ -510,6 +548,7 @@
 			baseConfigurationReference = 8FDC0C25422804BF52169CC3 /* Pods-PDRouter_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = N5ZNVTYNY8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PDRouter/PDRouter-Prefix.pch";
 				INFOPLIST_FILE = "PDRouter/PDRouter-Info.plist";

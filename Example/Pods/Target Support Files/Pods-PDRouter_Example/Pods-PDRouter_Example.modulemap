@@ -1,0 +1,6 @@
+framework module Pods_PDRouter_Example {
+  umbrella header "Pods-PDRouter_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
