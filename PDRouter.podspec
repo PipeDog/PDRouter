@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PDRouter'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A lightweight and flexible routing framework for iOS.'
 
   s.description      = <<-DESC

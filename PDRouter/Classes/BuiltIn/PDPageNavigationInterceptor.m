@@ -8,7 +8,7 @@
 #import "PDPageNavigationInterceptor.h"
 #import "PDRouterPageRegistry.h"
 #import "PDRouterParamReceiver.h"
-#import "PDObjectPropertyMapper.h"
+#import "PDPropertyMapper.h"
 
 @implementation PDPageNavigationInterceptor
 
@@ -28,10 +28,11 @@
 
     // 如果视图控制器遵循了 `PDRouterAutoParamReceiver` 协议，自动解析参数并赋值
     else if ([page conformsToProtocol:@protocol(PDRouterAutoParamReceiver)]) {
-        PDObjectSetPropertyValues(page, chain.request.parameters, ^PDObjectCustomPropertyMapper _Nullable{
-            return ([page respondsToSelector:@selector(routerCustomPropertyMapper)] ?
-                    [(id<PDRouterAutoParamReceiver>) page routerCustomPropertyMapper] : nil);
-        });
+        PDObjectCustomPropertyMapper mapper = ([page respondsToSelector:@selector(routerCustomPropertyMapper)] ? 
+                                               [(id<PDRouterAutoParamReceiver>) page routerCustomPropertyMapper] : nil);
+        [page setPropertyValues:chain.request.parameters mapperBlock:^PDObjectCustomPropertyMapper _Nullable{
+            return mapper;
+        }];
     }
 
     // 不接收参数

@@ -122,10 +122,7 @@ static inline void PDObjectSetNumberToProperty(__unsafe_unretained id model,
     NSString *className = NSStringFromClass([object class]);
     PDClassPropertyInfo *propertyInfo = [PDClassPropertyInfo propertyInfoWithClass:className property:propertyName];
     if (!propertyInfo) {
-        NSString *info = [NSString stringWithFormat:@"Can not match property name = `%@` in class `%@`!",
-                          propertyName,
-                          className];
-        NSAssert(NO, info);
+        NSLog(@"Failed to match property `%@` in class `%@`!", propertyName, className);
         return;
     }
     
@@ -213,20 +210,14 @@ static inline void PDObjectSetNumberToProperty(__unsafe_unretained id model,
             @try {
                 [object setValue:value forKey:propertyName];
             } @catch (NSException *exception) {
-                PDEncodingType type = (propertyInfo.type & PDEncodingTypeMask);
-                NSString *info = [NSString stringWithFormat:@"Unsupported data type = `%zd`!", type];
-                NSAssert(NO, info);
+                NSLog(@"Exception details:\nName: %@\nReason: %@\nUserInfo: %@\nCall Stack: %@",
+                      exception.name,
+                      exception.reason,
+                      exception.userInfo,
+                      exception.callStackSymbols);
             }
         } break;
     }
 }
 
 @end
-
-void PDObjectSetPropertyValues(id object,
-                               NSDictionary<NSString *, id> *keyValuePairs,
-                               PDObjectPropertyMapperBlock _Nullable mapperBlock) {
-    [[PDObjectPropertyMapper defaultMapper] mapKeyValuePairs:keyValuePairs
-                                                    toObject:object
-                                                 mapperBlock:mapperBlock];
-}

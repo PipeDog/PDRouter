@@ -13,6 +13,7 @@
 #import "PDPageNavigationInterceptor.h"
 #import "PDClassPropertyInfo.h"
 #import "PDObjectPropertyMapper.h"
+#import "PDPropertyMapper.h"
 #import "PDRouter.h"
 #import "PDRouterInterceptor.h"
 #import "PDRouterPageRegistry.h"

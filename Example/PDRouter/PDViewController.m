@@ -50,7 +50,9 @@
             @"array": @[@"e1", @2, @"e3", @4.0],
             @"s": @"This is a string value.",
             @"i": @123,
-            @"f": @3.001
+            @"f": @3.001,
+            @"none": @900,
+            @"str": @"str"
         }];
     } else if ([rowId isEqualToString:@"dog://open/page/manualparam"]) {
         [[PDRouter globalRouter] openURL:@"dog://open/page/manualparam" parameters:@{
