@@ -1,6 +1,6 @@
 //
 //  PDRouter.m
-//  PDPower
+//  PDRouter
 //
 //  Created by liang on 2024/3/19.
 //
@@ -91,8 +91,12 @@
     [interceptors addObjectsFromArray:self.interceptors];
     [interceptors addObject:[[PDPageNavigationInterceptor alloc] init]];
     
-    PDRouterRequest *request = [[PDRouterRequest alloc] initWithURLString:urlString parameters:parameters];
-    PDRealRouterInterceptorChain *chain = [[PDRealRouterInterceptorChain alloc] initWithIndex:0 
+    PDRouterRequestBuilder *builder = [[PDRouterRequestBuilder alloc] init];
+    builder.urlString = urlString;
+    builder.parameters = parameters;
+    PDRouterRequest *request = [builder build];
+    
+    PDRealRouterInterceptorChain *chain = [[PDRealRouterInterceptorChain alloc] initWithIndex:0
                                                                                       request:request
                                                                                  interceptors:interceptors
                                                                                     navigator:self.navigator];
